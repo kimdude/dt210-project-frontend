@@ -51,7 +51,7 @@ section {
 }
 
 /* Inputs */
-input[type=text] {
+input[type=text], input[type=password] {
   height: fit-content;
   padding: 10px 20px;
   border: none;

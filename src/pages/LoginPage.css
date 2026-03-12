@@ -1,0 +1,35 @@
+.loginForms {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 3vw;
+    margin-bottom: 40px;
+    border-radius: 0px 10px 10px 10px;
+    background-color: #F2F1EF;
+}
+
+.loginForms form {
+    width: 80%;
+}
+
+.loginForms form input:not([type=submit]) {
+    margin: 10px 0px;
+}
+
+.loginForms h1 {
+    color: black !important;
+}
+
+.loginNav {
+    margin-top: 40px;
+}
+
+.loginNav button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.loginNav button:hover {
+    cursor: pointer;
+}
