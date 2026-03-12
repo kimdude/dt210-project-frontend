@@ -1,0 +1,19 @@
+.gameSearchContainer {
+    display: flex;
+    align-items: center;
+}
+
+.gameTitle {
+    display: flex;
+    align-items: center;
+}
+
+.gameTitle > small {
+    display: block;
+    margin-left: auto;
+    text-decoration: underline;
+}
+
+.gameTitle > small:hover {
+    cursor: pointer;
+}

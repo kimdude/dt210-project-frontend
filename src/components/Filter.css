@@ -1,0 +1,22 @@
+.filterContainer {
+    padding: 20px 3vw;
+    background-color: #F2F1EF;
+    color: black;
+}
+
+.filterContainer > h2 {
+    color: #1E2C5E !important;
+}
+
+.filterContainer > div {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 8px 16px;
+    margin-bottom: 40px;
+}
+
+.filterContainer > div > div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

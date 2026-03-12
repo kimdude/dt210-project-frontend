@@ -20,6 +20,10 @@ main {
   width: 80vw;
 }
 
+section {
+  margin: 20px 0px 50px 0px;
+}
+
 /* Buttons */
 .btn {
   display: block;
@@ -29,14 +33,28 @@ main {
   text-decoration: none;
   color: black;
   font-weight: 500;
+  border: none;
   border-radius: 10px;
   background-color: #FEDE5D;
   box-shadow: inset 0px -4px 3px rgba(68, 54, 9, 0.3),
               inset 0px 4px 3px rgba(255, 254, 251, 0.35);
 }
 
+.btn:hover {
+  cursor: pointer;
+}
+
 .btn:active {
   background-color: #f1d14e;
   box-shadow: inset 0px -4px 3px rgba(68, 54, 9, 0.3),
               inset 0px 0px 2px 3px rgba(68, 54, 9, 0.2);
+}
+
+/* Inputs */
+input[type=text] {
+  height: fit-content;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  width: 80%;
 }
