@@ -1,0 +1,40 @@
+header {
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    padding: 0px 4vw;
+    height: 110px;
+    background-color: #1E2C5E;
+    box-shadow: 4px 0px 10px rgba(0,0,0,0.8)
+}
+
+.mainNav {
+    height: 100%;
+    margin-left: auto;
+}
+
+.mainNav > ul {
+    display: flex;
+    height: 100%;
+    margin: 0px;
+    list-style-type: none;
+}
+
+.mainNav > ul > li {
+    display: flex;
+    height: 100%;
+    padding: 0px;
+}
+
+.mainNav > ul > li > a {
+    height: 100%;
+    padding: 0px 20px;
+    align-content: center;
+    text-decoration: none;
+    color: white;
+}
+
+.active {
+    background-color: #7380AF;
+    color: black !important;
+}
