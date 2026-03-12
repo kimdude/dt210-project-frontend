@@ -1,0 +1,22 @@
+footer {
+    display: flex;
+    padding: 40px 4vw;
+    background-color: #1E2C5E;
+    box-shadow: -4px 0px 10px rgba(0,0,0,0.8);
+}
+
+footer a {
+    color: white;
+}
+
+.footerLogo {
+    display: block;
+    height: fit-content;
+    margin-left: auto;
+    margin-top: auto;
+}
+
+.footerLogo > img {
+    display: block;
+    margin: auto;
+}

@@ -1,10 +1,21 @@
+/* General styling */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   min-height: 100vh;
   background-image: linear-gradient(to right bottom, #1E2C5E, #FF7130, #FEDE5D );
   background-repeat: no-repeat;
   color: #F2F1EF;
+  font-family: montserrat, Arial, Helvetica, sans-serif;
 }
 
 body {
   margin: 0px;
+}
+
+main {
+  display: block;
+  margin: 0px auto;
+  max-width: 1200px;
+  width: 80vw;
 }
