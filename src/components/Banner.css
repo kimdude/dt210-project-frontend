@@ -1,0 +1,64 @@
+.banner {
+    padding: 50px 0px;
+    text-align: center;
+}
+
+.bannerLogo {
+    position: relative;
+    margin-bottom: 30px;
+    height: 180px;
+}
+
+.bannerLogo::after {
+    z-index: 1001;
+    position:absolute;
+    top: 20%;
+    left: 59%;
+    content: "✦";
+    font-size: 24px;
+    color: #fff;
+    opacity: 0;
+    transform: scale(0);
+    animation: starTwinkle 0.6s 1.5s forwards;
+}
+
+.bannerLogo > img {
+    position: relative;
+    z-index: 1000;
+    width: 300px;
+    animation-name: bannerLogo;
+    animation-duration: 1s;
+    animation-delay: 0.5s;
+    animation-fill-mode: both;
+}
+
+@keyframes bannerLogo {
+    from {
+        transform: rotate(-20deg) scale(2);
+        filter: drop-shadow(0px 0px 15px rgba(0,0,0,0.4));
+    }
+    to {
+       transform: rotate(0deg) scale(1);
+    }
+}
+
+@keyframes starTwinkle {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .bannerLogo > img {
+        animation: none !important;
+    }
+}

@@ -1,6 +1,9 @@
+import { Banner } from "../components/Banner"
 
 export const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>
+      <Banner />
+    </div>
   )
 }
