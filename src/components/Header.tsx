@@ -15,6 +15,7 @@ export const Header = () => {
         <ul>
           <li><NavLink to="/">Hem</NavLink></li>
           <li><NavLink to="/games">Spel</NavLink></li>
+          <li><NavLink to="/profile">Din profil</NavLink></li>
           <li><NavLink to="/login">Logga in</NavLink></li>
         </ul>
       </nav>

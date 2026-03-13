@@ -17,3 +17,9 @@
 .gameTitle > small:hover {
     cursor: pointer;
 }
+
+.gamesGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

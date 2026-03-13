@@ -1,0 +1,78 @@
+/* Styling for game preview-articles */
+
+/* Cover */
+.gameOverview {
+    width: 300px;
+    height: 170px;
+    border-radius: 10px;
+    margin: 10px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #1E2C5E;
+    transition: transform 1s;
+}
+
+.gameOverview:hover {
+    transform: scale(1.5);
+    cursor: pointer;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.4);
+}
+
+/* Description */
+.gameOverview > div {
+    display:block;
+    margin-left: auto;
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+    transition: width 2s;
+    background-color: rgba(30,44,94,0.95);
+    box-sizing: border-box;
+}
+
+.gameOverview:hover > div {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.gameOverview h2 {
+    font-size: 1rem;
+}
+
+.gameOverviewDate {
+    font-size: 0.6rem !important;
+}
+
+.gameOverview p {
+    font-size: 0.7rem;
+    word-wrap: break-word;
+}
+
+/* Dev details */
+.gameOverviewDev, .gameOverviewCategory {
+    display: flex;
+}
+
+.gameOverviewDev > div {
+    display: flex;
+    margin-right: 20px;
+}
+
+.gameOverviewDev p {
+    font-size: 0.6rem;
+    margin-left: 10px;
+}
+
+.gameOverviewCategory p {
+    font-size: 0.5rem;
+    font-weight: 500;
+    color: black;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #FEDE5D;
+}
