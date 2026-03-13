@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import useGet from "../hooks/useGet"
 
 //Components
@@ -9,15 +9,26 @@ import { GameItem } from "../components/GameItem"
 import type { GameOverview } from "../types/GameTypes"
 
 import "./GamesPage.css"
+import PacmanLoader from "react-spinners/PacmanLoader"
 
 export const GamesPage = () => {
 
-  //Hooks
-  const { fetchData, data, loading, error } = useGet<GameOverview[]>("https://dt210g-project-backend-hapi.onrender.com/games");
-
-
-  //Statates
+  //States
   const [ displayFilters, setDisplayFilters ] = useState<boolean>(false);
+  const [ query, setQuery ] = useState<string>(""); //Queries set by child comp
+
+  const url: string = "https://dt210g-project-backend-hapi.onrender.com/games" + query;
+
+  console.log(url)
+
+  //Hooks
+  const { fetchData, data, loading, error } = useGet<GameOverview[]>(url);
+
+  //Fetching data when url changes
+  useEffect(() => {
+    fetchData();
+  }, [url])
+
   return (
     <section>
 
@@ -35,15 +46,17 @@ export const GamesPage = () => {
       </div>
 
       {/* Filters */}
-      {displayFilters && <Filters />}
+      {displayFilters && <Filters setQuery={setQuery} />}
 
       {/* Displaying games */}
       <div className="gamesGrid">
-        {data && data.map((game, index) => (
+        {data && data.map((game) => (
           <GameItem key={game.id} game={game} />
         ))}
       </div>
 
+      {/* Spinner */}
+      {loading && <PacmanLoader color="#FEDE5D" className="spinner" />}
       
     </section>
   )

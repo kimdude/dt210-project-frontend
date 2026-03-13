@@ -58,3 +58,9 @@ input[type=text], input[type=password] {
   border-radius: 10px;
   width: 80%;
 }
+
+/* Confirmations */
+.spinner {
+  display: block;
+  margin: 10px auto;
+}
