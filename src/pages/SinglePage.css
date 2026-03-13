@@ -1,6 +1,10 @@
-.singleTitle {
+.singleTitle, .gameReviewsTitle, .singleDetailsTitle {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+}
+
+.missingData {
+    font-style: italic;
 }

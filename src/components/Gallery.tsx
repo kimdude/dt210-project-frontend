@@ -19,6 +19,7 @@ export const Gallery = ({images}: {images: Screenshot[]}) => {
     ));
 
     const openSlideShow = (index: number) => {
+        console.log("got here")
         setShowImage(index);
         setOpen(true)
     }
@@ -29,11 +30,11 @@ export const Gallery = ({images}: {images: Screenshot[]}) => {
             {/* Image gallery */}
             {images?.slice(0,3).map((picture, index) => (
                 <div key={index}>
-                    <img src={picture.image} alt={"Bild " + index} />
+                    <img src={picture.image} alt={"Bild " + index} onClick={() => openSlideShow(index)}/>
                 </div>
             ))}
 
-            {images.length > 3 && <div className="galleryMore" onClick={() => openSlideShow(0)}><p>+{ images.length - 3}</p></div>}
+            {images?.length > 3 && <div className="galleryMore" onClick={() => openSlideShow(0)}><p>+{ images.length - 3}</p></div>}
 
             <Lightbox open={open} close={() => setOpen(false)} slides={ slides } index={showImage} />
         </div>
