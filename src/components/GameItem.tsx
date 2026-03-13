@@ -1,4 +1,5 @@
 import type { GameOverview } from "../types/GameTypes"
+import { useNavigate } from "react-router-dom"
 
 import platformIcon from "../assets/platformIcon.svg"
 import devIcon from "../assets/devIcon.svg"
@@ -7,8 +8,10 @@ import "./GameItem.css"
 
 export const GameItem = ({game}: {game: GameOverview}) => {
 
+  const navigate = useNavigate();
+
   return (
-    <article className="gameOverview" style={{ backgroundImage: `url(${game.thumbnail})` }}>
+    <article className="gameOverview" style={{ backgroundImage: `url(${game.thumbnail})` }} onClick={() => navigate("/details/" + game.id)}>
       <div>
 
         {/* Category */}

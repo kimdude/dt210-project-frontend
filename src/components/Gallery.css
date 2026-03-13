@@ -1,0 +1,38 @@
+.galleryContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 30%;
+    grid-template-rows: 180px 180px 180px;
+}
+
+.galleryContainer > div {
+    overflow: hidden;
+    padding: 10px;
+}
+
+.galleryContainer > div:first-of-type {
+    grid-column: 1/ 2;
+    grid-row: 1 / 4;
+}
+
+.galleryContainer > div:not(:first-of-type) {
+    grid-column: 2 / 3;
+}
+
+.galleryContainer > div > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.galleryContainer > div > img:hover {
+    cursor: pointer;
+}
+
+.galleryMore {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 600;
+}

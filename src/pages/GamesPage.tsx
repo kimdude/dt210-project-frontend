@@ -74,6 +74,12 @@ export const GamesPage = () => {
 
       {/* Spinner */}
       {loading && <PacmanLoader color="#FEDE5D" className="spinner" />}
+
+      {/* Message */}
+      {filteredGames.length === 0 && !loading && <p>Inga spel hittades.</p>}
+
+      {/* Error */}
+      {error && <p>{ error }</p>}
       
     </section>
   )

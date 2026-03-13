@@ -2,8 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { GamesPage } from "./pages/GamesPage";
 import { LoginPage } from "./pages/LoginPage";
-import { Layout } from "./components/layout";
 import { ProfilePage } from "./pages/ProfilePage";
+
+import { Layout } from "./components/layout";
+import { LayoutSubPage } from "./components/LayoutSubPage"
+import { SinglePage } from "./pages/SinglePage";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +28,16 @@ const router = createBrowserRouter([
             {
                 path: "/profile",
                 element: <ProfilePage />
+            }
+        ]
+    },
+    {
+        path: "/details",
+        element: <LayoutSubPage />,
+        children: [
+            {
+                path: "/details/:_id",
+                element: <SinglePage />
             }
         ]
     }
