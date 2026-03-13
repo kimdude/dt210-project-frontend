@@ -4,7 +4,7 @@ import { GamesPage } from "./pages/GamesPage";
 import { LoginPage } from "./pages/LoginPage";
 import { ProfilePage } from "./pages/ProfilePage";
 
-import { Layout } from "./components/layout";
+import { Layout } from "./components/Layout";
 import { LayoutSubPage } from "./components/LayoutSubPage"
 import { SinglePage } from "./pages/SinglePage";
 
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         element: <LayoutSubPage />,
         children: [
             {
-                path: "/details/:_id",
+                path: "/details/:title/:_id",
                 element: <SinglePage />
             }
         ]

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import useGet from "../hooks/useGet";
 import { useParams } from "react-router-dom";
+import { PacmanLoader } from "react-spinners";
 
 import type { GameDetails } from "../types/GameTypes";
 
@@ -31,6 +32,12 @@ export const SinglePage = () => {
             </svg>
         </div>
       </div>
+
+      {/* Spinner */}
+      {loading && <PacmanLoader color="#FEDE5D" className="spinner" />}
+
+      {/* Error */}
+      {error && <p className="error">{ error }</p>}
 
       {/* Gallery container */}
       <div className="singleGallery">
@@ -71,7 +78,6 @@ export const SinglePage = () => {
           <ReviewItem key={item._id} review={item} />
         ))}
 
-        {/* Messages and confirmations */}
         {data.reviews?.length === 0 && <span className="missingData">Inga recensioner ännu</span>}
 
       </div>
