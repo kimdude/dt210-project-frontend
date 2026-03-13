@@ -16,18 +16,35 @@ export const GamesPage = () => {
   //States
   const [ displayFilters, setDisplayFilters ] = useState<boolean>(false);
   const [ query, setQuery ] = useState<string>(""); //Queries set by child comp
+  const [ searchPhrase, setSearchPhrase ] = useState<string>("");
+  const [ filteredGames, setFilteredGames ] = useState<GameOverview[]>([]);
 
   const url: string = "https://dt210g-project-backend-hapi.onrender.com/games" + query;
-
-  console.log(url)
 
   //Hooks
   const { fetchData, data, loading, error } = useGet<GameOverview[]>(url);
 
+  //Setting games array to fetched data when data changes
+  useEffect(() => {
+    setFilteredGames(data || []);
+  }, [data]);
+
   //Fetching data when url changes
   useEffect(() => {
     fetchData();
-  }, [url])
+  }, [url]);
+
+  //Search by title
+  const search = () => {
+
+    if(searchPhrase === "") {
+      setFilteredGames(data);
+      return;
+    }
+
+    const searchResult = data.filter((game) => game.title.toUpperCase().includes(searchPhrase.toUpperCase()));
+    setFilteredGames(searchResult);
+  }
 
   return (
     <section>
@@ -35,14 +52,14 @@ export const GamesPage = () => {
       {/* Search bar */}
       <div className="gameSearchContainer">
         <label htmlFor="searchBar"></label>
-        <input type="text" id="searchBar" placeholder="Sök spel" />
-        <button className="btn">Sök</button>
+        <input type="text" id="searchBar" placeholder="Sök spel" onChange={(e) => setSearchPhrase(e.target.value)} onKeyDown={(e) => e.key === "Enter" && search()} />
+        <button className="btn" onClick={search}>Sök</button>
       </div>
 
       {/* All games */}
       <div className="gameTitle">
         <h1>Datorspel</h1>
-        <small onClick={() => setDisplayFilters(!displayFilters)}>Filtrera</small>
+        <small onClick={() => setDisplayFilters(!displayFilters)}>Filter</small>
       </div>
 
       {/* Filters */}
@@ -50,7 +67,7 @@ export const GamesPage = () => {
 
       {/* Displaying games */}
       <div className="gamesGrid">
-        {data && data.map((game) => (
+        {filteredGames && filteredGames.map((game) => (
           <GameItem key={game.id} game={game} />
         ))}
       </div>
