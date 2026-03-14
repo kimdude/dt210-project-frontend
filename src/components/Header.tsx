@@ -1,9 +1,12 @@
 import { NavLink, Link } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
 import logo from "../assets/logo.svg"
 
 import "./Header.css"
 
 export const Header = () => {
+  const { user } = useAuth();
+
   return (
     <header>
 
@@ -15,8 +18,10 @@ export const Header = () => {
         <ul>
           <li><NavLink to="/">Hem</NavLink></li>
           <li><NavLink to="/games">Spel</NavLink></li>
-          <li><NavLink to="/profile">Din profil</NavLink></li>
-          <li><NavLink to="/login">Logga in</NavLink></li>
+
+          {
+            user ? <li><NavLink to="/profile">Din profil</NavLink></li> : <li><NavLink to="/login">Logga in</NavLink></li>
+          }
         </ul>
       </nav>
     </header>

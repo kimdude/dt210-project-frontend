@@ -10,24 +10,3 @@
 .missingData {
     font-style: italic;
 }
-
-/* Breadcrumbs */
-.breadcrumbs {
-    display: flex;
-    background-color: #7380AF;
-    padding: 10px 3vw;
-    margin: 0px;
-    list-style-type: none;
-    box-shadow: 4px 0px 10px rgba(0,0,0,0.8);
-    color: black;
-}
-
-.breadcrumbs > li:not(:first-of-type)::before {
-    margin: 0px 10px;
-    content: "-"
-}
-
-.breadcrumbs a {
-    color: black;
-    text-decoration: none;
-}

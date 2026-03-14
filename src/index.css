@@ -64,3 +64,14 @@ input[type=text], input[type=password] {
   display: block;
   margin: 10px auto;
 }
+
+.error {
+  display: block;
+  width: 80%;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: solid 1px rgb(238, 51, 18);
+  background-color: rgba(224, 27, 13, 0.35);
+  color: black !important;
+}
