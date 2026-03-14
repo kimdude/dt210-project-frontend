@@ -1,35 +1,48 @@
 import { useState } from 'react'
 
 
-export default function usePost<T> (url: string) : { data: T, error: string | null, loading: boolean, postData: (item: any) => Promise<void> } {
+export default function usePost<T> (url: string, auth?: boolean) : { data: T, error: string | null, loading: boolean, postData: (item: any) => Promise<void> } {
 
     //States
     const [data, setData] = useState<T>([] as T);
     const [loading, setLoading] = useState(false); 
     const [error, setError] = useState<string | null>(null);
 
-    const token: string | null = localStorage.getItem("token");
-
     //Posting item
     const postData = async(item: any) => {
+
         try {
             setLoading(true);
             setError(null);
 
+            let token;
+            let options: Record<string, string> = {
+                    "Content-Type": "application/json"
+                }
+
+            //Setting headers if call needs authentication
+            if(auth) {
+                token = localStorage.getItem("token");
+                options = {
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "application/json"
+                }
+            }
+
             //Fetch API
             const response = await fetch(url, {
                 method: "POST",
-                headers: {
-                    "Authorization": "Bearer " + token,
-                    "Content-Type": "application/json"
-                },
+                headers: options,
                 body: JSON.stringify(item)
             });
 
-            if(response.ok) {
-                const result = await response.json() as T;
-                setData(result);
+            if(!response.ok) {
+                console.log(response)
+                throw new Error("Ett fel har uppstått. Prova igen senare.");
             }
+            
+            const result = await response.json() as T;
+            setData(result);
             
         } catch(err) {
 
