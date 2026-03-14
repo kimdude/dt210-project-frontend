@@ -59,7 +59,7 @@ export const GamesPage = () => {
       {/* All games */}
       <div className="gameTitle">
         <h1>Datorspel</h1>
-        <small onClick={() => setDisplayFilters(!displayFilters)}>Filter</small>
+        <small className="spanBtn" onClick={() => setDisplayFilters(!displayFilters)}>Filter</small>
       </div>
 
       {/* Filters */}

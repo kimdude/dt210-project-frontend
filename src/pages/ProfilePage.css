@@ -1,0 +1,63 @@
+/* Styling for profile page */
+.profileTitle {
+    text-align: center;
+    margin: 50px 0px; 
+}
+
+.profileSettings {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 0px;
+    list-style-type: none;
+}
+
+.profileSettings > li:first-of-type {
+    margin-right: 15px;
+}
+
+/* Password section */
+#profilePassword {
+    position: fixed;
+    top: 20%;
+    left: 15%;
+    width: 60%;
+    padding: 20px 4vw;
+    border-radius: 10px;
+    background-color: #F2F1EF;
+    color: black !important;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.4);
+}
+
+.passwordForm > div:not(:first-of-type) {
+    margin-top: 15px;
+}
+
+.passwordTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.passwordTitle button {
+    border: none;
+    background-color: transparent;
+}
+
+.passwordTitle button:hover {
+    cursor: pointer;
+}
+
+.passwordTitle button span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: black;
+}
+
+.passwordTitle button span:first-of-type {
+    transform: rotate(45deg);
+}
+
+.passwordTitle button span:last-of-type {
+    transform: rotate(-45deg);
+    margin-top: -1.4px;
+}

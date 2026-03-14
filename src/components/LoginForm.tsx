@@ -55,7 +55,6 @@ export const LoginForm = () => {
       await login({username, password});
     } catch(error) {
       setErrors(prev => ({...prev, loginErr: "Inloggning misslyckades. Kontrollera användarnamn och lösenord."}));
-      console.log(errors)
     }
   }
 

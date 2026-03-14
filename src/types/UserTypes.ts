@@ -29,3 +29,14 @@ export interface UserFormErrors {
     passwordErr?: string,
     loginErr?: string
 }
+
+export interface PasswordFormErrors {
+    passwordErr?: string,
+    newPasswordErr?: string,
+    confirmPasswordErr?: string,
+    updateErr?: string
+}
+
+export interface PasswordResponse {
+    message: string
+}

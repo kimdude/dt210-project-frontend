@@ -11,11 +11,6 @@
 .gameTitle > small {
     display: block;
     margin-left: auto;
-    text-decoration: underline;
-}
-
-.gameTitle > small:hover {
-    cursor: pointer;
 }
 
 .gamesGrid {

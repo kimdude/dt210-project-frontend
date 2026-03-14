@@ -1,17 +1,18 @@
 import { useState } from 'react'
 
 
-export default function usePut<T> (url: string) : { data: T, error: string | null, loading: boolean, putData: (item: any) => Promise<void> } {
+export default function usePut<T> (url: string) : { data: T | null, error: string | null, loading: boolean, putData: (item: any) => Promise<void> } {
 
     //States
-    const [data, setData] = useState<T>([] as T);
+    const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState(false); 
     const [error, setError] = useState<string | null>(null);
 
-    const token: string | null = localStorage.getItem("token");
-
     //Updating item
     const putData = async(item: any) => {
+        
+        const token: string | null = localStorage.getItem("token");
+
         try {
             setLoading(true);
             setError(null);
@@ -26,10 +27,12 @@ export default function usePut<T> (url: string) : { data: T, error: string | nul
                 body: JSON.stringify(item)
             });
 
-            if(response.ok) {
-                const result = await response.json() as T;
-                setData(result);
+            if(!response.ok) {
+                throw new Error("Ett fel uppstod. Prova igen senare.");
             }
+
+            const result = await response.json() as T;
+            setData(result);
             
         } catch(err) {
 

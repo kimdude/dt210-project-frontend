@@ -50,6 +50,15 @@ section {
               inset 0px 0px 2px 3px rgba(68, 54, 9, 0.2);
 }
 
+.spanBtn {
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+
+.spanBtn:hover {
+  cursor: pointer;
+}
+
 /* Inputs */
 input[type=text], input[type=password] {
   height: fit-content;
