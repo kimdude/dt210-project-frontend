@@ -30,3 +30,13 @@ export interface GameDetails extends GameBase {
   reviews: Review[],
   saved: boolean
 }
+
+export interface SavedGame {
+  gameId: number,
+  name: string,
+  score: number
+}
+
+export interface List {
+  list: SavedGame[]
+}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export default function useGet<T> (url: string) : { data: T, error: string | null, loading: boolean, fetchData: () => void } {
+export default function useGet<T> (url: string, auth?: boolean) : { data: T, error: string | null, loading: boolean, fetchData: () => void } {
 
     //States
     const [data, setData] = useState<T>([] as T);
@@ -18,7 +18,20 @@ export default function useGet<T> (url: string) : { data: T, error: string | nul
             setLoading(true);
             setError(null);
 
-            const response = await fetch(url);
+            let token;
+            let options: Record<string, string> = {};
+
+            //Setting headers if call needs authentication
+            if(auth) {
+                token = localStorage.getItem("token");
+                options = {
+                    "Authorization": "Bearer " + token
+                }
+            }
+
+            const response = await fetch(url, {
+                headers: options
+            });
 
             if(response.ok) {
                 const result = await response.json() as T;

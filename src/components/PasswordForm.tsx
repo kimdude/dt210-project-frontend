@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "react";
 import usePut from "../hooks/usePut";
 
 import type { PasswordResponse } from "../types/UserTypes";
@@ -46,6 +46,7 @@ export const PasswordForm = ({displayForm}: {displayForm: any}) => {
             return setInputErrors(validationErrors);
         }
 
+        //Updating password
         await putData({ password: password, newPassword: newPassword });
 
         if(data) {
@@ -53,8 +54,6 @@ export const PasswordForm = ({displayForm}: {displayForm: any}) => {
             setNewPassword("");
             setConfirmPassword("");
         }
-
-        console.log(data)
 
     }
 
