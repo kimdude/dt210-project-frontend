@@ -16,6 +16,7 @@ export default function usePut<T> (url: string) : { data: T | null, error: strin
         try {
             setLoading(true);
             setError(null);
+            setData(null);
 
             //Fetch api
             const response = await fetch(url, {

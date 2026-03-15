@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 
-export default function usePost<T> (url: string, auth?: boolean) : { data: T, error: string | null, loading: boolean, postData: (item: any) => Promise<void> } {
+export default function usePost<T> (url: string, auth?: boolean) : { data: T | null, error: string | null, loading: boolean, postData: (item: any) => Promise<void> } {
 
     //States
-    const [data, setData] = useState<T>([] as T);
+    const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState(false); 
     const [error, setError] = useState<string | null>(null);
 
@@ -14,6 +14,7 @@ export default function usePost<T> (url: string, auth?: boolean) : { data: T, er
         try {
             setLoading(true);
             setError(null);
+            setData(null);
 
             let token;
             let options: Record<string, string> = {
@@ -37,7 +38,6 @@ export default function usePost<T> (url: string, auth?: boolean) : { data: T, er
             });
 
             if(!response.ok) {
-                console.log(response)
                 throw new Error("Ett fel har uppstått. Prova igen senare.");
             }
             

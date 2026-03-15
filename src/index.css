@@ -40,14 +40,18 @@ section {
               inset 0px 4px 3px rgba(255, 254, 251, 0.35);
 }
 
-.btn:hover {
+.btn:hover:not(:disabled) {
   cursor: pointer;
 }
 
-.btn:active {
+.btn:active:not(:disabled) {
   background-color: #f1d14e;
   box-shadow: inset 0px -4px 3px rgba(68, 54, 9, 0.3),
               inset 0px 0px 2px 3px rgba(68, 54, 9, 0.2);
+}
+
+.btn:disabled {
+  background-color: #af9734;
 }
 
 .spanBtn {
@@ -69,6 +73,17 @@ input[type=text], input[type=password] {
 }
 
 /* Confirmations */
+.confirm {
+  display: block;
+  width: 80%;
+  padding: 10px 20px;
+  margin: 20px 0px;
+  border-radius: 10px;
+  border: solid 1px rgb(67, 214, 22);
+  background-color: rgba(140, 247, 41, 0.35);
+  color: black !important;
+}
+
 .spinner {
   display: block;
   margin: 10px auto;

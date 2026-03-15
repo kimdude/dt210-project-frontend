@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import usePut from "../hooks/usePut";
 
 import type { PasswordResponse } from "../types/UserTypes";
@@ -7,13 +7,27 @@ import type { PasswordFormErrors } from "../types/UserTypes";
 export const PasswordForm = ({displayForm}: {displayForm: any}) => {
 
     //Hooks
-    const { putData, error, data } = usePut<PasswordResponse>("https://dt210g-project-backend-hapi.onrender.com/profile");
+    const { putData, error, data, loading } = usePut<PasswordResponse>("https://dt210g-project-backend-hapi.onrender.com/profile");
 
     //States
     const [ password, setPassword ] = useState<string>("");
     const [ newPassword, setNewPassword ] = useState<string>("");
     const [ confirmPassword, setConfirmPassword ] = useState<string>("");
     const [ inputErrors, setInputErrors ] = useState<PasswordFormErrors>({});
+    const [ message, setMessage ] = useState<string>("");
+
+    //Resetting data on success
+    useEffect(() => {
+
+        if(data) {
+            setMessage("Lösenordet har uppdaterats!");
+
+            setPassword("");
+            setNewPassword("");
+            setConfirmPassword("");
+        }
+
+    }, [data]);
 
     //Validate inputs
     const validate = () => {
@@ -38,6 +52,7 @@ export const PasswordForm = ({displayForm}: {displayForm: any}) => {
     const changePassword = async(e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         setInputErrors({});
+        setMessage("");
 
         //Validating inputs
         const validationErrors: PasswordFormErrors = validate();
@@ -48,12 +63,6 @@ export const PasswordForm = ({displayForm}: {displayForm: any}) => {
 
         //Updating password
         await putData({ password: password, newPassword: newPassword });
-
-        if(data) {
-            setPassword("");
-            setNewPassword("");
-            setConfirmPassword("");
-        }
 
     }
 
@@ -89,7 +98,8 @@ export const PasswordForm = ({displayForm}: {displayForm: any}) => {
 
             {/* Submit button */}
             {error && <span className="error" style={{marginTop: "20px"}}>{ error }</span>}
-            <input type="submit" className="btn" value="Byt lösenord" />
+            { message && <span className="confirm">{ message }</span>}
+            <input type="submit" className="btn" value="Byt lösenord" disabled={loading} />
         </form>
     )
 }

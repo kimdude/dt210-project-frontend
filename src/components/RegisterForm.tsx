@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import type { LoginCredentials, PasswordResponse, UserFormErrors } from "../types/UserTypes"
 import usePost from "../hooks/usePost";
@@ -11,17 +11,27 @@ export const RegisterForm = () => {
   //states
   const [ formData, setFormData ] = useState<LoginCredentials>({ username: "", displayName: "", password: ""});
   const [ errors, setErrors ] = useState<UserFormErrors>({});
+  const [ message, setMessage ] = useState<string>("");
+
+  //Updating message
+  useEffect(() => {
+    if(data?.message) {
+      setMessage("Du har registrerats!");
+      setFormData({ username: "", displayName: "", password: ""});
+    }
+
+  }, [data]);
 
   //Validating inputs
   const validate = () => {
     const validationErrors: UserFormErrors = {};
 
-    if(formData.username.length < 4) {
-      validationErrors.usernameErr = "Användarnamn måste vara minst 4 tecken långt.";
+    if(formData.username.length < 4 || formData.username.length > 15 ) {
+      validationErrors.usernameErr = "Användarnamn måste vara mellan 4-15 tecken långt.";
     }
 
-    if(!formData.displayName || formData.displayName.length < 4) {
-      validationErrors.displayNameErr = "Ditt synliga namn måste vara minst 4 tecken långt.";
+    if(!formData.displayName || formData.displayName.length < 4 || formData.displayName.length >15 ) {
+      validationErrors.displayNameErr = "Ditt synliga namn måste vara mellan 4-15 tecken långt.";
     }
 
     if(formData.password.length < 8) {
@@ -32,14 +42,13 @@ export const RegisterForm = () => {
   }
 
   //Adding user
-  const registerUser = async(e: any) => {
+  const registerUser = async(e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrors({});
+    setMessage("");
 
     //Validating
     const validationErrors = validate();
-
-    console.log(validationErrors)
 
     if(Object.keys(validationErrors).length > 0) {
       return setErrors(validationErrors);
@@ -47,7 +56,6 @@ export const RegisterForm = () => {
 
     //Registering user
     await postData({username: formData.username, displayName: formData.displayName, password: formData.password});
-    console.log(data)
     
   }
 
@@ -67,7 +75,8 @@ export const RegisterForm = () => {
         {errors.passwordErr && <span className="error">{ errors.passwordErr }</span>}
 
         { error && <span className="error">{ error }</span>}
-        <input type="submit" value="Registrera dig" className="btn" />
+        { message && <span className="confirm">{ message }</span>}
+        <input type="submit" value="Registrera dig" className="btn" disabled={loading} />
     </form>
   )
 }
