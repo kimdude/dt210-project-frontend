@@ -30,6 +30,8 @@ export default function usePost<T> (url: string, auth?: boolean) : { data: T | n
                 }
             }
 
+            console.log(options)
+
             //Fetch API
             const response = await fetch(url, {
                 method: "POST",
@@ -38,6 +40,7 @@ export default function usePost<T> (url: string, auth?: boolean) : { data: T | n
             });
 
             if(!response.ok) {
+                console.log(response)
                 throw new Error("Ett fel har uppstått. Prova igen senare.");
             }
             

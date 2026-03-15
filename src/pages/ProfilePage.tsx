@@ -35,10 +35,11 @@ export const ProfilePage = () => {
             {/* List with saved games */}
             <section className="profileSaved">
                 <h2>Sparade spel</h2>
-                { games?.list && 
+                { games?.list ? 
                     games.list.map((game: any) => (
                         <p key={game.gameId}>{ game.name }</p>
-                    ))
+                    )) :
+                    <small>Inga sparade spel</small>
                 }
                 <Link to="/" className="btn">Se hela listan</Link>
             </section>
@@ -46,10 +47,11 @@ export const ProfilePage = () => {
             {/* List with shared reviews */}
             <section className="profileReviews">
                 <h2>Dina recensioner</h2>
-                { reviews && 
+                { reviews.length > 0 ?
                     reviews.map((review: any) => (
                         <p key={review.id}>{ review.title }</p>
-                    ))
+                    )) :
+                    <small>Inga delade recensioner</small>
                 }
           
                 <Link to="/" className="btn">Se hela listan</Link>

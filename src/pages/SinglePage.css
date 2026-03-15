@@ -10,3 +10,21 @@
 .missingData {
     font-style: italic;
 }
+
+/* Review form */
+.ReviewFormContainer {
+    margin-top: 20px;
+    padding: 20px 0px 10px 0px;
+    color: black !important;
+    background-color: rgba(242, 241, 239, 0.7);
+}
+
+.ReviewFormContainer > div {
+    display: block;
+    margin: auto;
+    width: 80%;
+}
+
+.ReviewFormContainer input:not([type=submit]) {
+    margin: 10px 0px;
+}

@@ -8,3 +8,16 @@ export interface Review {
     createdAt: string,
     updatedAt: string,
 }
+
+export interface ReviewFormData {
+    title: string,
+    description: string,
+    rating: number
+}
+
+export interface ReviewFormErrors {
+    titleErr?: string,
+    descrErr?: string,
+    ratingErr?: string,
+    postErr?: string
+}
