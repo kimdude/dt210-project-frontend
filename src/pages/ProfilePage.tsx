@@ -11,6 +11,7 @@ import { PasswordForm } from "../components/PasswordForm";
 import "./ProfilePage.css"
 import type { ProfileReview } from "../types/ReviewTypes";
 import type { List } from "../types/GameTypes";
+import { ListItem } from "../components/ListItem";
 
 export const ProfilePage = () => {
 
@@ -40,7 +41,7 @@ export const ProfilePage = () => {
                 <h2>Sparade spel</h2>
                 { games?.list ? 
                     games.list.map((game: any) => (
-                        <p key={game.gameId}>{ game.name }</p>
+                        <ListItem key={game.gameId} game={game} />
                     )) 
                     : loadingGames ? <PacmanLoader color="#FEDE5D" className="spinner" />
                     : <small>Inga sparade spel</small>

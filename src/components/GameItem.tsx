@@ -22,7 +22,7 @@ export const GameItem = ({game}: {game: GameOverview}) => {
         {/* Short description of game */}
         <div className="gameOverviewDescr">
             <h2>{ game.title }</h2>
-            <p className="gameOverviewDate">Utgivningsår: { game.release_date }</p>
+            <p className="gameOverviewDate">Utgivningsår: { game.releaseDate }</p>
             <p>{ game.short_description }</p>
         </div>
 

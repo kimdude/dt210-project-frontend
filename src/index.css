@@ -64,6 +64,35 @@ section {
   cursor: pointer;
 }
 
+.crossBtn {
+  background-color: transparent;
+  border: none;
+}
+
+.crossBtn:hover {
+  cursor: pointer;
+}
+
+.crossBtn > span {
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: black;
+}
+
+.crossBtn > span:first-of-type {
+  transform: rotate(45deg);
+}
+
+.crossBtn > span:last-of-type {
+  transform: rotate(-45deg);
+  margin-top: -2px;
+}
+
+.white span {
+  background-color: white !important;
+}
+
 /* Inputs */
 input[type=text], input[type=password], textarea {
   height: fit-content;

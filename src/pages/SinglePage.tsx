@@ -10,12 +10,16 @@ import { ReviewItem } from "../components/ReviewItem";
 
 import "./SinglePage.css"
 import { ReviewForm } from "../components/ReviewForm";
+import usePost from "../hooks/usePost";
+import useDelete from "../hooks/useDelete";
 
 export const SinglePage = () => {
 
   //Hooks
   const { _id } = useParams<{_id: string}>();
   const { data, loading, error, fetchData } = useGet<GameDetails>("https://dt210g-project-backend-hapi.onrender.com/games/" + _id);
+  const { postData, data: saveData, loading: saveLoading, error: saveError } = usePost("https://dt210g-project-backend-hapi.onrender.com/saved/" + _id, true);
+  const { deleteData, data: dataDeleted, loading: deleteLoading, deleteError } = useDelete("https://dt210g-project-backend-hapi.onrender.com/saved/" + _id);
 
   //States
   const [ saved, setSaved ] = useState<boolean>(false);
@@ -31,6 +35,16 @@ export const SinglePage = () => {
     }
   }
 
+  //Saving or removing from list
+  const saveGame = async() => {
+
+    if(data.saved === false) {
+      await postData(null);
+    } else {
+      await deleteData();
+    }
+  }
+
   return (
 
     <section className="singleContainer">
@@ -42,7 +56,7 @@ export const SinglePage = () => {
         </div>
 
         {/* Save game */}
-        <div>
+        <div onClick={() => saveGame()}>
             <svg width="30px" height="30px" viewBox="0 0 16 16" fill={!saved ? "white" : "red"} xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z" />
             </svg>

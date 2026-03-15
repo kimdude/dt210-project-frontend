@@ -32,6 +32,7 @@ export interface GameDetails extends GameBase {
 }
 
 export interface SavedGame {
+  _id: string,
   gameId: number,
   name: string,
   score: number

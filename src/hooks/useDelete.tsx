@@ -1,10 +1,11 @@
 import { useState } from "react";
 
-export default function useDelete(url: string) : { loading: boolean, deleteError: string | null, deleteData: () => void } {
+export default function useDelete(url: string) : { data: string | null,loading: boolean, deleteError: string | null, deleteData: () => void } {
     
     //States
     const [loading, setLoading] = useState<boolean>(false);
     const [deleteError, setdeleteError] = useState<string | null>(null);
+    const [data, setData] = useState<string | null>(null);
 
     const token: string | null = localStorage.getItem("token");
 
@@ -26,6 +27,9 @@ export default function useDelete(url: string) : { loading: boolean, deleteError
                 throw new Error("Ett fel uppstod. Prova igen senare.");
             }
 
+            const finalResult = await result.json();
+            setData("Objekt borttaget");
+
         } catch (err) {
 
             //Checking if error message exists
@@ -41,5 +45,5 @@ export default function useDelete(url: string) : { loading: boolean, deleteError
         }
     }
 
-    return { loading, deleteError, deleteData }
+    return { data, loading, deleteError, deleteData }
 }
