@@ -30,8 +30,6 @@ export default function usePost<T> (url: string, auth?: boolean) : { data: T | n
                 }
             }
 
-            console.log(options)
-
             //Fetch API
             const response = await fetch(url, {
                 method: "POST",

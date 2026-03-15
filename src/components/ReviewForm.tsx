@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
+import usePost from '../hooks/usePost';
+import { useAuth } from '../context/AuthContext';
 
 import type { ReviewFormData }from '../types/ReviewTypes';
 import type { ReviewFormErrors } from '../types/ReviewTypes';
-import usePost from '../hooks/usePost';
+import { Link } from 'react-router-dom';
 
 export const ReviewForm = ({ gameId, updateList }: { gameId: number, updateList: () => void}) => {
 
@@ -10,10 +12,10 @@ export const ReviewForm = ({ gameId, updateList }: { gameId: number, updateList:
     const [ formData, setFormData ] = useState<ReviewFormData>({title: "", description: "", rating: 0});
     const [ formErrors, setFormErrors ] = useState<ReviewFormErrors>({});
     const [ message, setMessage ] = useState<string>("");
-
     
     //Hooks
     const { postData, data, loading, error } = usePost("https://dt210g-project-backend-hapi.onrender.com/games/" + gameId, true);
+    const { user } = useAuth();
 
     //Updating message when data changes
     useEffect(() => {
@@ -63,6 +65,7 @@ export const ReviewForm = ({ gameId, updateList }: { gameId: number, updateList:
 
     return (
         <form className="ReviewFormContainer" onSubmit={shareReview}>
+            { !user && <div className="ReviewFormCover"><Link to="/login" className="spanBtn">Registrera dig för att lägga till en recension</Link></div>}
             <div>
                 <h3>Lägg till recension</h3>
                 

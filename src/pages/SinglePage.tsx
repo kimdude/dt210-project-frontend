@@ -19,16 +19,31 @@ export const SinglePage = () => {
 
   //States
   const [ saved, setSaved ] = useState<boolean>(false);
+  const [ reachedEnd, setReachedEnd ] = useState<boolean>(false);
+
+  //Calculating if reviews are scrolled to bottom
+  const scrollToBottom = (e: HTMLElement) => {
+
+    if(e.scrollTop >= (e.scrollHeight - e.offsetHeight - 150)) {
+      setReachedEnd(true)
+    } else {
+      setReachedEnd(false)
+    }
+  }
 
   return (
 
     <section className="singleContainer">
+      {/* Title */}
       <div className="singleTitle">
-        <h1>{ data.title }</h1>
+        <div>
+          <h1>{ data.title }</h1>
+          <p>Kategori: <strong>{ data.genre }</strong></p>
+        </div>
 
         {/* Save game */}
         <div>
-            <svg width="25px" height="25px" viewBox="0 0 16 16" fill={!saved ? "white" : "red"} xmlns="http://www.w3.org/2000/svg">
+            <svg width="30px" height="30px" viewBox="0 0 16 16" fill={!saved ? "white" : "red"} xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z" />
             </svg>
         </div>
@@ -47,6 +62,16 @@ export const SinglePage = () => {
       
       {/* Game details */}
       <div className="singleDetails">
+
+        {/* Details */}
+        <div className="singleDetailsDev">
+          <small>Utgivningsdatum: <strong>{ data.releaseDate }</strong></small>
+          <small>Utvecklare: <strong>{ data.developer }</strong></small>
+          <small>Utgivare: <strong>{ data.publisher }</strong></small>
+          <small>Plattform: <strong>{ data.platform }</strong></small>
+        </div>
+
+        {/* Title and score */}
         <div className="singleDetailsTitle">
           <div>
             <h2>Om spelet</h2>
@@ -68,7 +93,7 @@ export const SinglePage = () => {
       </div>
 
       {/* Reviews */}
-      <div className="gameReviews">
+      <div className="gameReviews" onScroll={(e) => scrollToBottom(e.currentTarget)}>
         <div className="gameReviewsTitle">
           <h2>Recensioner</h2>
           <small>Totalt: {data.reviews ? <span>{data.reviews.length}</span> : <span>0</span> } </small>
@@ -80,10 +105,12 @@ export const SinglePage = () => {
         ))}
 
         {data.reviews?.length === 0 && <span className="missingData">Inga recensioner ännu</span>}
-
-        {/* Form to add review */}
-        <ReviewForm gameId={Number(_id)} updateList={fetchData} />
+        {!reachedEnd && <div className="scrollShadow"></div>}
       </div>
+
+      
+      {/* Form to add review */}
+      <ReviewForm gameId={Number(_id)} updateList={fetchData} />
 
     </section>
   )

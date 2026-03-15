@@ -57,6 +57,7 @@ section {
 .spanBtn {
   text-decoration: underline;
   font-size: 0.9rem;
+  color: white;
 }
 
 .spanBtn:hover {

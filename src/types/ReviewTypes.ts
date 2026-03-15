@@ -1,3 +1,5 @@
+import type { SavedGame } from "./GameTypes"
+
 export interface Review {
     _id: string,
     gameId: string,
@@ -20,4 +22,8 @@ export interface ReviewFormErrors {
     descrErr?: string,
     ratingErr?: string,
     postErr?: string
+}
+
+export interface ProfileReview extends Review {
+    gameDetails: SavedGame
 }

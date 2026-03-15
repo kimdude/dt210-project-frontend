@@ -7,7 +7,7 @@ export interface GameBase {
   short_description: string,
   genre: string,
   platform: string,
-  release_date: string,
+  releaseDate: string,
   thumbnail: string,
 }
 
