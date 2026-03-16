@@ -8,6 +8,8 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { Layout } from "./components/Layout";
 import { LayoutSubPage } from "./components/LayoutSubPage"
 import { SinglePage } from "./pages/SinglePage";
+import { ListGamesPage } from "./pages/ListGamesPage";
+import { ListReviewsPage } from "./pages/ListReviewsPage";
 
 const router = createBrowserRouter([
     {
@@ -43,6 +45,22 @@ const router = createBrowserRouter([
             {
                 path: ":title/:_id",
                 element: <SinglePage />
+            },
+            {
+                path: "saved-games",
+                element: ( 
+                    <ProtectedRoute>
+                        <ListGamesPage />
+                    </ProtectedRoute>
+                )
+            },
+            {
+                path: "shared-reviews",
+                element: ( 
+                    <ProtectedRoute>
+                        <ListReviewsPage />
+                    </ProtectedRoute>
+                )
             }
         ]
     }

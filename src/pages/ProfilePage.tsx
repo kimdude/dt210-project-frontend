@@ -2,7 +2,7 @@ import { useAuth } from "../context/AuthContext"
 import useGet from "../hooks/useGet";
 import { useState } from "react";
 
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import PacmanLoader from "react-spinners/PacmanLoader"
 
 import { ReviewItem } from "../components/ReviewItem";
@@ -19,6 +19,7 @@ export const ProfilePage = () => {
     const { user, logout } = useAuth();
     const { fetchData: fetchReviews, error: reviewError, data: reviews, loading: loadingReviews } = useGet<ProfileReview[]>("https://dt210g-project-backend-hapi.onrender.com/profile/reviews", true);
     const { fetchData: fetchGames, error: gamesError, data: games, loading: loadingGames } = useGet<List>("https://dt210g-project-backend-hapi.onrender.com/saved", true);
+    const navigate = useNavigate();
 
     //States
     const [ displaySettings, setDisplaySettings ] = useState<boolean>(false);
@@ -38,15 +39,20 @@ export const ProfilePage = () => {
 
             {/* List with saved games */}
             <section className="profileSaved">
-                <h2>Sparade spel</h2>
+                <div>
+                    <h2>Sparade spel</h2>
+                    <small>Totalt: { games?.list?.length }</small>
+                </div>
                 { games?.list ? 
-                    games.list.map((game: any) => (
+                    games.list.slice(0,3).map((game: any) => (
                         <ListItem key={game.gameId} game={game} updateList={fetchGames} />
                     )) 
                     : loadingGames ? <PacmanLoader color="#FEDE5D" className="spinner" />
                     : <small>Inga sparade spel</small>
                 }
-                <Link to="/" className="btn">Se hela listan</Link>
+
+                {/* Navigating to list-page and sending title + type */}
+                <button className="btn" onClick={() => navigate("/details/saved-games",{ state: { title: "Sparade spel", type: "Din profil" }})}>Se hela listan</button>
             </section>
 
             {/* List with shared reviews */}
@@ -63,7 +69,8 @@ export const ProfilePage = () => {
                     : <small>Inga delade recensioner</small>
                 }
           
-                <Link to="/" className="btn">Se hela listan</Link>
+                {/* Navigating to list-page and sending title + type */}
+                <button className="btn" onClick={() => navigate("/details/shared-reviews",{ state: { title: "Dina recensioner", type: "Din profil" }})}>Se hela listan</button>
             </section>
 
             {/* Editing password */}
