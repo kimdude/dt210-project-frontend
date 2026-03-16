@@ -11,7 +11,7 @@ export interface LoginCredentials {
 }
 
 export interface AuthResponse {
-    userId: string,
+    _id: string,
     username: string,
     displayName: string,
     token: string

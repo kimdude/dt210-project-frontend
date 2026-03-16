@@ -137,3 +137,31 @@ input[type=number] {
   background-color: rgba(224, 27, 13, 0.35);
   color: black !important;
 }
+
+.popUp {
+  z-index: 1000;
+  position: fixed; 
+  bottom: 20px;
+  width: 80vw;
+  padding: 10px;
+  border-radius: 10px;
+  border: solid 1px rgb(255, 208, 0);
+  background-color: rgba(235, 201, 9, 0.8);
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  animation-name: displayPopup;
+  animation-duration: 0.25s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+
+/* Animations */
+@keyframes displayPopup {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1
+  }
+}

@@ -22,7 +22,8 @@ export const ReviewItem = ({review}: {review: Review | ProfileReview }) => {
 
     return (
         <article className="reviewContainer">
-            { parent === "private" && <p>Spel: { (review as ProfileReview).gameDetails?.name }</p>}
+            { parent === "private" && <p>Spel: { (review as ProfileReview).gameDetails?.name }</p> }
+            { parent === "public" && <p>Användare: { (review as Review).displayName }</p>}
 
             {/* Star icons */}
             <div className="reviewRatings">

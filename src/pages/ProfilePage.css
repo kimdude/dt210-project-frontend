@@ -15,6 +15,12 @@
     margin-right: 15px;
 }
 
+.profileReviews > div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* Password section */
 #profilePassword {
     position: fixed;

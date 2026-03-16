@@ -25,7 +25,8 @@ export default function useGet<T> (url: string, auth?: boolean) : { data: T, err
             if(auth) {
                 token = localStorage.getItem("token");
                 options = {
-                    "Authorization": "Bearer " + token
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "application/json"
                 }
             }
 

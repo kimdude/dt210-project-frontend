@@ -19,7 +19,6 @@ export const Gallery = ({images}: {images: Screenshot[]}) => {
     ));
 
     const openSlideShow = (index: number) => {
-        console.log("got here")
         setShowImage(index);
         setOpen(true)
     }

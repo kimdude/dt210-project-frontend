@@ -37,10 +37,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
             }
 
             const data = await response.json() as AuthResponse;
-            const user: User = { _id: data.userId, username: data.username, displayName: data.displayName }
+            const user: User = { _id: data._id, username: data.username, displayName: data.displayName }
+            setUser(user)
 
             localStorage.setItem("token", data.token);
-            setUser(user);
 
         } catch(error) {
             throw error;
@@ -75,7 +75,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
             }
 
             const data = await result.json() as AuthResponse;
-            const user: User = { _id: data.userId, username: data.username, displayName: data.displayName }
+            const user: User = { _id: data._id, username: data.username, displayName: data.displayName }
 
             setUser(user);
 

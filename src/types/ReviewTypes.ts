@@ -4,6 +4,7 @@ export interface Review {
     _id: string,
     gameId: string,
     userId: string,
+    displayName: string,
     rating: number,
     title: string,
     description: string,

@@ -22,6 +22,14 @@
     margin: 0px 10px;
 }
 
+.singlePageSave:hover {
+    cursor: pointer;
+}
+
+.singlePageFullDescr {
+    white-space: pre-line;
+}
+
 /* Reviews */
 .gameReviews {
     position: relative;

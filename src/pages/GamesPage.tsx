@@ -63,7 +63,7 @@ export const GamesPage = () => {
       </div>
 
       {/* Filters */}
-      {displayFilters && <Filters setQuery={setQuery} />}
+      {displayFilters && <Filters setQuery={setQuery} toggleFilter={setDisplayFilters} />}
 
       {/* Displaying games */}
       <div className="gamesGrid">

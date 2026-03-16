@@ -41,7 +41,7 @@ export const ProfilePage = () => {
                 <h2>Sparade spel</h2>
                 { games?.list ? 
                     games.list.map((game: any) => (
-                        <ListItem key={game.gameId} game={game} />
+                        <ListItem key={game.gameId} game={game} updateList={fetchGames} />
                     )) 
                     : loadingGames ? <PacmanLoader color="#FEDE5D" className="spinner" />
                     : <small>Inga sparade spel</small>
@@ -51,7 +51,10 @@ export const ProfilePage = () => {
 
             {/* List with shared reviews */}
             <section className="profileReviews">
-                <h2>Dina recensioner</h2>
+                <div>
+                    <h2>Dina recensioner</h2>
+                    <small>Totalt: { reviews?.length }</small>
+                </div>
                 { reviews.length > 0 ?
                     reviews.slice(0,3).map((review: any) => (
                         <ReviewItem key={review._id} review={review} />
