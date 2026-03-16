@@ -63,7 +63,7 @@ export const ProfilePage = () => {
                 </div>
                 { reviews.length > 0 ?
                     reviews.slice(0,3).map((review: any) => (
-                        <ReviewItem key={review._id} review={review} />
+                        <ReviewItem key={review._id} review={review} updateList={fetchReviews} />
                     )) 
                     : loadingReviews ?  <PacmanLoader color="#FEDE5D" className="spinner" />
                     : <small>Inga delade recensioner</small>

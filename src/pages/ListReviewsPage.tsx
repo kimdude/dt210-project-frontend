@@ -18,7 +18,7 @@ export const ListReviewsPage = () => {
 
       { data.length > 0 ?
           data.map((review: any) => (
-              <ReviewItem key={review._id} review={review} />
+              <ReviewItem key={review._id} review={review} updateList={fetchData}/>
           )) 
           : <small>Inga delade recensioner</small>
       }

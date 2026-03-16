@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import type { ProfileReview, Review } from "../types/ReviewTypes"
-import "./ReviewItem.css"
 
-export const ReviewItem = ({review}: {review: Review | ProfileReview }) => {
+import settingsIcon from "../assets/settingsIcon.svg"
+
+import "./ReviewItem.css"
+import useDelete from "../hooks/useDelete";
+
+export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview, updateList: () => void }) => {
 
     const formattedDate = review?.createdAt.slice(0,10);
     const stars: number[] = [1,2,3,4,5];
 
     //States
     const [ parent, setParent ] = useState<string>("public");
+    const [ displayMenu, setDisplayMenu ] = useState<boolean>(false);
+    const [ displayForm, setForm ] = useState<boolean>(false);
 
     //Hooks
+    const { deleteError, deleteData } = useDelete("https://dt210g-project-backend-hapi.onrender.com/games/reviews/" + review._id);
+
     //Checking if parent is profile-page or not
     useEffect(() => {
 
@@ -20,9 +28,33 @@ export const ReviewItem = ({review}: {review: Review | ProfileReview }) => {
 
     }, []);
 
+    //Deleting review 
+    const deleteReview = async() => {
+        await deleteData();
+        updateList();
+    }
+
     return (
         <article className="reviewContainer">
-            { parent === "private" && <p>Spel: { (review as ProfileReview).gameDetails?.name }</p> }
+            {/* Text for reviews displayed on profile */}
+            { parent === "private" && 
+                <div className="reviewProfileSettings">
+                    <p>Spel: { (review as ProfileReview).gameDetails?.name }</p>
+                    <button onClick={() => setDisplayMenu(!displayMenu)}><img src={settingsIcon} alt="Hantera recension" width="30"/></button>
+
+                    {/* Setting nav */}
+                    {displayMenu &&
+                        <nav className="reviewSettingsNav">
+                            <ul>
+                                <li>Redigera recension</li>
+                                <li onClick={() => deleteReview()}>Radera recension</li>
+                            </ul>
+                        </nav>
+                    }
+                </div> 
+            }
+
+            {/* Text for reviews on public pages */}
             { parent === "public" && <p>Användare: { (review as Review).displayName }</p>}
 
             {/* Star icons */}
@@ -34,9 +66,13 @@ export const ReviewItem = ({review}: {review: Review | ProfileReview }) => {
                 ))}
             </div>
             
+            {/* Review text */}
             <h3>{ review.title }</h3>
             <p>{ review.description }</p>
             <small>{ formattedDate }</small>
+
+            {/* Error message */}
+            { deleteError && <small className="error">{ deleteError }</small>}
         </article>
     )
 }

@@ -156,7 +156,7 @@ export const SinglePage = () => {
 
         {/* Review articles */}
         {data.reviews?.map((item) => (
-          <ReviewItem key={item._id} review={item} />
+          <ReviewItem key={item._id} review={item} updateList={fetchData} />
         ))}
 
         {data.reviews?.length === 0 && <span className="missingData">Inga recensioner ännu</span>}

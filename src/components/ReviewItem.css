@@ -5,3 +5,44 @@
     border-radius: 10px;
     background-color: #1E2C5E;
 }
+
+/* Editing view - styling */
+.reviewProfileSettings {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.reviewProfileSettings button {
+    z-index: 100;
+    background-color: transparent;
+    border: none;
+}
+
+.reviewProfileSettings button:hover {
+    cursor: pointer;
+}
+
+/* Settings nav */
+.reviewSettingsNav {
+    z-index: 80;
+    position: absolute;
+    right: 0;
+    top: 30px;
+}
+.reviewSettingsNav > ul {
+    color: black !important;
+    list-style-type: none;
+    background-color: #F2F1EF;
+    padding: 0px;
+}
+
+.reviewSettingsNav > ul > li {
+    padding: 10px;
+}
+
+.reviewSettingsNav > ul > li:hover {
+    cursor: pointer;
+    background-color: #c5c5c5;
+}
