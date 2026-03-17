@@ -159,6 +159,13 @@ input[type=number] {
   animation-fill-mode: both;
 }
 
+/* Game container */
+.gamesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 /* Animations */
 @keyframes displayPopup {
   from {
