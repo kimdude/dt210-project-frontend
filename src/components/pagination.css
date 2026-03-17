@@ -1,0 +1,35 @@
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.paginationContainer button {
+    background-color: transparent;
+    border: none;
+}
+
+.paginationContainer button:hover {
+    cursor: pointer;
+}
+
+.paginationContainer ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0px 10px;
+    color: black;
+}
+
+.paginationContainer ul > li {
+    padding: 10px;
+}
+
+.paginationContainer ul > li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.activePage {
+    font-weight: 700;
+    text-decoration: underline;
+}

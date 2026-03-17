@@ -3,13 +3,13 @@ import useGet from "../hooks/useGet"
 
 //Components
 import { Filters } from "../components/Filters"
-import { GameItem } from "../components/GameItem"
 
 //Interfaces
 import type { GameOverview } from "../types/GameTypes"
 
 import "./GamesPage.css"
 import PacmanLoader from "react-spinners/PacmanLoader"
+import { Pagination } from "../components/Pagination"
 
 export const GamesPage = () => {
 
@@ -65,13 +65,6 @@ export const GamesPage = () => {
       {/* Filters */}
       {displayFilters && <Filters setQuery={setQuery} toggleFilter={setDisplayFilters} />}
 
-      {/* Displaying games */}
-      <div className="gamesGrid">
-        {filteredGames && filteredGames.map((game) => (
-          <GameItem key={game.id} game={game} />
-        ))}
-      </div>
-
       {/* Spinner */}
       {loading && <PacmanLoader color="#FEDE5D" className="spinner" />}
 
@@ -80,6 +73,9 @@ export const GamesPage = () => {
 
       {/* Error */}
       {error && <p>{ error }</p>}
+
+      {/* Pagination */}
+      <Pagination data={filteredGames} />
       
     </section>
   )
