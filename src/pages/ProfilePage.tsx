@@ -17,8 +17,8 @@ export const ProfilePage = () => {
 
     //Hooks
     const { user, logout } = useAuth();
-    const { fetchData: fetchReviews, error: reviewError, data: reviews, loading: loadingReviews } = useGet<ProfileReview[]>("https://dt210g-project-backend-hapi.onrender.com/profile/reviews", true);
-    const { fetchData: fetchGames, error: gamesError, data: games, loading: loadingGames } = useGet<List>("https://dt210g-project-backend-hapi.onrender.com/saved", true);
+    const { fetchData: fetchReviews, data: reviews, loading: loadingReviews } = useGet<ProfileReview[]>("https://dt210g-project-backend-hapi.onrender.com/profile/reviews", true);
+    const { fetchData: fetchGames, data: games, loading: loadingGames } = useGet<List>("https://dt210g-project-backend-hapi.onrender.com/saved", true);
     const navigate = useNavigate();
 
     //States

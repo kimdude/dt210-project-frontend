@@ -51,8 +51,7 @@ export const GamesPage = () => {
 
       {/* Search bar */}
       <div className="gameSearchContainer">
-        <label htmlFor="searchBar"></label>
-        <input type="text" id="searchBar" placeholder="Game title" onChange={(e) => setSearchPhrase(e.target.value)} onKeyDown={(e) => e.key === "Enter" && search()} />
+        <input type="text" id="searchBar" aria-label="Game title" placeholder="Game title" onChange={(e) => setSearchPhrase(e.target.value)} onKeyDown={(e) => e.key === "Enter" && search()} />
         <button className="btn" onClick={search}>Search</button>
       </div>
 

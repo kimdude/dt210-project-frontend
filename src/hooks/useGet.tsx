@@ -46,7 +46,7 @@ export default function useGet<T> (url: string, auth?: boolean) : { data: T, err
                 return setError(err.message);
             }
 
-            setError("Ett fel har uppstått. Prova igen senare.");
+            setError("An error occurred. Please try again later");
 
         } finally {
             setLoading(false);

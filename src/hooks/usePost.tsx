@@ -39,7 +39,7 @@ export default function usePost<T> (url: string, auth?: boolean) : { data: T | n
 
             if(!response.ok) {
                 console.log(response)
-                throw new Error("Ett fel har uppstått. Prova igen senare.");
+                throw new Error("An error occurred. Please try again later");
             }
             
             const result = await response.json() as T;
@@ -52,7 +52,7 @@ export default function usePost<T> (url: string, auth?: boolean) : { data: T | n
                 return setError(err.message);
             }
 
-            setError("Ett fel uppstod. Prova igen senare.");
+            setError("An error occurred. Please try again later");
 
         } finally {
             setLoading(false);

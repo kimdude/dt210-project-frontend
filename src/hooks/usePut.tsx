@@ -29,7 +29,7 @@ export default function usePut<T> (url: string) : { data: T | null, error: strin
             });
 
             if(!response.ok) {
-                throw new Error("Ett fel uppstod. Prova igen senare.");
+                throw new Error("An error occurred. Please try again later");
             }
 
             const result = await response.json() as T;
@@ -42,7 +42,7 @@ export default function usePut<T> (url: string) : { data: T | null, error: strin
                 return setError(err.message);
             }
 
-            setError("Ett fel uppstod. Prova igen senare.");
+            setError("An error occurred. Please try again later");
 
         } finally {
             setLoading(false);

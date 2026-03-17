@@ -72,27 +72,24 @@ export const PasswordForm = ({displayForm}: {displayForm: any}) => {
             {/* Title */}
             <div className="passwordTitle">
                 <h2>Change password</h2>
-                <button type="button" onClick={() => displayForm(false)}>
+                <button type="button" onClick={() => displayForm(false)} aria-label="Close" title="Close">
                     <span></span>
                     <span></span>
                 </button>
             </div>
 
             <div>
-                <label htmlFor="password"></label>
-                <input type="password" name="password" id="password" placeholder="Current password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="password" name="password" id="password" aria-label="Current password" placeholder="Current password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 {inputErrors.passwordErr && <span className="error">{ inputErrors.passwordErr }</span>}
             </div>
 
             <div>
-                <label htmlFor="newPassword"></label>
-                <input type="password" name="newPassword" id="newPassword" placeholder="New password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                <input type="password" name="newPassword" id="newPassword" aria-label="New password" placeholder="New password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                 {inputErrors.newPasswordErr && <span className="error">{ inputErrors.newPasswordErr }</span>}
             </div>
 
             <div>
-                <label htmlFor="confirmPassword"></label>
-                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                <input type="password" name="confirmPassword" id="confirmPassword" aria-label="Confirm password" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                 {inputErrors.confirmPasswordErr && <span className="error">{ inputErrors.confirmPasswordErr }</span>}
             </div>
 

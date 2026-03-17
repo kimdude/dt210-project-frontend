@@ -62,16 +62,13 @@ export const RegisterForm = () => {
   return (
     <form className="loginContainer" onSubmit={registerUser}>
         <h1>Register</h1>
-        <label htmlFor="usernameInp"></label>
-        <input type="text" name="usernameInp" id="usernameInp" placeholder="Username" value={ formData.username } onChange={(e) => setFormData({...formData, username: e.target.value})} />
+        <input type="text" name="usernameInp" id="usernameInp" aria-label="Username" placeholder="Username" value={ formData.username } onChange={(e) => setFormData({...formData, username: e.target.value})} />
         {errors.usernameErr && <span className="error">{ errors.usernameErr }</span>}
 
-        <label htmlFor="displayNameInp"></label>
-        <input type="text" name="displayNameInp" id="displayNameInp" placeholder="Visible name" value={ formData.displayName } onChange={(e) => setFormData({...formData, displayName: e.target.value})} />
+        <input type="text" name="displayNameInp" id="displayNameInp" aria-label="Visible name" placeholder="Visible name" value={ formData.displayName } onChange={(e) => setFormData({...formData, displayName: e.target.value})} />
         {errors.displayNameErr && <span className="error">{ errors.displayNameErr }</span>}
 
-        <label htmlFor="passwordInp"></label>
-        <input type="password" name="passwordInp" id="passwordInp" placeholder="Password" value={ formData.password } onChange={(e) => setFormData({...formData, password: e.target.value})} />
+        <input type="password" name="passwordInp" id="passwordInp" aria-label="Password" placeholder="Password" value={ formData.password } onChange={(e) => setFormData({...formData, password: e.target.value})} />
         {errors.passwordErr && <span className="error">{ errors.passwordErr }</span>}
 
         { error && <span className="error">{ error }</span>}

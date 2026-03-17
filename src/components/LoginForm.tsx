@@ -9,6 +9,7 @@ export const LoginForm = () => {
   const [ username, setUsername ] = useState<string>("");
   const [ password, setPassword ] = useState<string>("");
   const [ errors, setErrors ] = useState<UserFormErrors>({});
+  const [ loading, setLoading ] = useState<boolean>(false);
 
   //Hooks
   const { login, user } = useAuth();
@@ -52,25 +53,27 @@ export const LoginForm = () => {
 
     //Logging in
     try {
+      setLoading(true);
       await login({username, password});
     } catch(error) {
       setErrors(prev => ({...prev, loginErr: "Login failed. Check username and password."}));
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
     <form className="loginContainer" onSubmit={submit}>
         <h1>Login</h1>
-        <label htmlFor="usernameInp"></label>
-        <input type="text" name="usernameInp" id="usernameInp" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input type="text" name="usernameInp" id="usernameInp" aria-label="Username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
         { errors.usernameErr && <span className="error">{errors.usernameErr}</span>}
 
         <label htmlFor="passwordInp"></label>
-        <input type="password" name="passwordInp" id="passwordInp" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="password" name="passwordInp" id="passwordInp" aria-label="Password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         { errors.passwordErr && <span className="error">{errors.passwordErr}</span>}
 
         { errors.loginErr && <span className="error">{errors.loginErr}</span>}
-        <input type="submit" value="Log in" className="btn" />
+        <input type="submit" value="Log in" className="btn" disabled={loading} />
     </form>
   )
 }

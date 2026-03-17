@@ -70,14 +70,12 @@ export const ReviewForm = ({ gameId, updateList }: { gameId: number, updateList:
                 <h3>Review game</h3>
                 
                 <div>
-                    <label htmlFor="titleInp"></label>
-                    <input type="text" name="titleInp" id="titleInp" placeholder="Title" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} />
+                    <input type="text" name="titleInp" aria-label="Title" id="titleInp" placeholder="Title" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} />
                     {formErrors.titleErr && <span className="error">{ formErrors.titleErr }</span>}
                 </div>
 
                 <div>
-                    <label htmlFor="descrInp"></label>
-                    <textarea name="descrInp" id="descrInp" placeholder="Description" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} />
+                    <textarea name="descrInp" id="descrInp" aria-label="Description" placeholder="Description" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} />
                     {formErrors.descrErr && <span className="error">{ formErrors.descrErr }</span>}
                 </div>
 

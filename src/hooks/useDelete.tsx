@@ -24,11 +24,11 @@ export default function useDelete(url: string) : { data: string | null,loading: 
             });
 
             if(!result.ok) {
-                throw new Error("Ett fel uppstod. Prova igen senare.");
+                throw new Error("An error occurred. Please try again later");
             }
 
             await result.json();
-            setData("Objekt borttaget");
+            setData("Object removed");
 
         } catch (err) {
 
@@ -37,7 +37,7 @@ export default function useDelete(url: string) : { data: string | null,loading: 
                 return setdeleteError(err.message);
             }
 
-            setdeleteError("Ett fel har uppstått. Prova igen senare.");
+            setdeleteError("An error occurred. Please try again later");
 
         }  finally {
             setLoading(false);

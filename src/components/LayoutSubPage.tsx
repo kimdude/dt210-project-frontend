@@ -1,7 +1,7 @@
-import { Header } from "./header"
+import { Header } from "./Header"
 import { BreadCrumbs } from "./BreadCrumbs"
 import { Outlet } from "react-router-dom"
-import { Footer } from "./footer"
+import { Footer } from "./Footer"
 
 
 export const LayoutSubPage = () => {

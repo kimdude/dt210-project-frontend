@@ -146,30 +146,29 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
             {
                 displayForm &&
                 <form className="editReviewForm" onSubmit={updateReview}>
+                    
                     {/* Title */}
                     <div className="passwordTitle">
                         <h4>Edit review</h4>
-                        <button type="button" onClick={() => setDisplayForm(false)}>
+                        <button type="button" onClick={() => setDisplayForm(false)} aria-label="close" title="Close">
                             <span></span>
                             <span></span>
                         </button>
                     </div>
                     
                     <div>
-                        <label htmlFor="titleInp"></label>
-                        <input type="text" name="titleInp" id="titleInp" placeholder="Rubrik" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} />
+                        <input type="text" name="titleInp" id="titleInp" aria-label="Title" placeholder="Title" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} />
                         {formErrors.titleErr && <span className="error">{ formErrors.titleErr }</span>}
                     </div>
 
                     <div>
-                        <label htmlFor="descrInp"></label>
-                        <textarea name="descrInp" id="descrInp" placeholder="Beskrivning" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} />
+                        <textarea name="descrInp" id="descrInp" aria-label="Description" placeholder="Description" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} />
                         {formErrors.descrErr && <span className="error">{ formErrors.descrErr }</span>}
                     </div>
 
                     <div>
-                        <label htmlFor="ratingInp">Betyg: </label>
-                        <input type="number" name="ratingInp" id="ratingInp" placeholder="Betyg" value={formData.rating} onChange={(e) => setFormData({...formData, rating: Number(e.target.value)})} />
+                        <label htmlFor="ratingInp">Rating: </label>
+                        <input type="number" name="ratingInp" id="ratingInp" placeholder="Rating" value={formData.rating} onChange={(e) => setFormData({...formData, rating: Number(e.target.value)})} />
                         {formErrors.ratingErr && <span className="error">{ formErrors.ratingErr }</span>}
                     </div>
 
@@ -177,7 +176,7 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
                     {error && <span className="error">{ error }</span>}
 
                     {/* Submit button */}
-                    <input type="submit" className="btn" value="Uppdatera" disabled={loading}/>
+                    <input type="submit" className="btn" value="Uppdate" disabled={loading}/>
 
                 </form>
             }
