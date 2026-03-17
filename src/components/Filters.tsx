@@ -7,21 +7,21 @@ export const Filters = ({setQuery, toggleFilter}: {setQuery: any, toggleFilter: 
     const allPlatforms: string[] = ["pc", "browser"];
 
     //States
-    const [ filterCat, setFilterCat ] = useState<string>("alla");
-    const [ filterPlat, setFilterPlat ] = useState<string>("alla");
+    const [ filterCat, setFilterCat ] = useState<string>("all");
+    const [ filterPlat, setFilterPlat ] = useState<string>("all");
 
     //Setting filters
     const setFilters = async(e: any) => {
         e.preventDefault();
 
         //Setting queries
-        if(filterCat !== "alla" && filterPlat !== "alla") {
+        if(filterCat !== "all" && filterPlat !== "all") {
             setQuery("?platform=" + filterPlat + "&category=" + filterCat);
 
-        } else if(filterPlat !== "alla") {
+        } else if(filterPlat !== "all") {
             setQuery("?platform=" + filterPlat);
 
-        } else if(filterCat !== "alla") {
+        } else if(filterCat !== "all") {
             setQuery("?category=" + filterCat);
             
         } else {
@@ -35,9 +35,9 @@ export const Filters = ({setQuery, toggleFilter}: {setQuery: any, toggleFilter: 
         <form className="filterContainer">
                 {/* Categories */}
                 <div>
-                    <label htmlFor="categoryInp">Kategori</label>
-                    <select name="categoryInp" id="categoryInp" defaultValue="alla" onChange={(e) => setFilterCat(e.target.value)}>
-                        <option value="alla">alla</option>
+                    <label htmlFor="categoryInp">Category</label>
+                    <select name="categoryInp" id="categoryInp" defaultValue="all" onChange={(e) => setFilterCat(e.target.value)}>
+                        <option value="all">all</option>
                         {
                             allCategories.map((category: string, index) => (
                                 <option key={index} value={category}>{ category }</option>
@@ -49,8 +49,8 @@ export const Filters = ({setQuery, toggleFilter}: {setQuery: any, toggleFilter: 
                 {/* Platforms */}
                 <div>
                     <label htmlFor="platformInp">Platform</label>
-                    <select name="platformInp" id="platformInp" defaultValue="alla" onChange={(e) => setFilterPlat(e.target.value)}>
-                        <option value="alla">alla</option>
+                    <select name="platformInp" id="platformInp" defaultValue="all" onChange={(e) => setFilterPlat(e.target.value)}>
+                        <option value="all">all</option>
                         {
                             allPlatforms.map((platform: string, index) => (
                                 <option key={index} value={platform}>{ platform }</option>
@@ -59,7 +59,7 @@ export const Filters = ({setQuery, toggleFilter}: {setQuery: any, toggleFilter: 
                     </select>
                 </div>
 
-            <input type="submit" value="Filtrera" className="btn submitBtn" onClick={setFilters}/>
+            <input type="submit" value="Filter" className="btn submitBtn" onClick={setFilters}/>
         </form>
     )
 }

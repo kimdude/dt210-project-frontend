@@ -20,7 +20,7 @@ export const ReviewForm = ({ gameId, updateList }: { gameId: number, updateList:
     //Updating message when data changes
     useEffect(() => {
         if(data) {
-            setMessage("Tack för din recension!");
+            setMessage("Thank you for sharing a review!");
             setFormData({title: "", description: "", rating: 0});
         }
     }, [data]);
@@ -30,15 +30,15 @@ export const ReviewForm = ({ gameId, updateList }: { gameId: number, updateList:
         let validationErrors: ReviewFormErrors = {};
 
         if(formData.title.length < 3 || formData.title.length > 20) {
-            validationErrors.titleErr = "Rubriken måste vara mellan 3-20 tecken lång.";
+            validationErrors.titleErr = "Title must be between 3-20 characters long.";
         }
 
         if(formData.description.length < 5) {
-            validationErrors.descrErr = "Beskrivningen måste vara över 5 tecken lång.";
+            validationErrors.descrErr = "Description must be atleast 5 characters long.";
         }
 
         if(formData.rating < 1 || formData.rating > 5) {
-            validationErrors.ratingErr = "Betyg måste vara på skalan 1-5";
+            validationErrors.ratingErr = "Rating must be on a scale of 1-5.";
         }
 
         return validationErrors;
@@ -65,25 +65,25 @@ export const ReviewForm = ({ gameId, updateList }: { gameId: number, updateList:
 
     return (
         <form className="ReviewFormContainer" onSubmit={shareReview}>
-            { !user && <div className="ReviewFormCover"><Link to="/login" className="spanBtn">Registrera dig för att lägga till en recension</Link></div>}
+            { !user && <div className="ReviewFormCover"><Link to="/login" className="spanBtn">Register to review game</Link></div>}
             <div>
-                <h3>Lägg till recension</h3>
+                <h3>Review game</h3>
                 
                 <div>
                     <label htmlFor="titleInp"></label>
-                    <input type="text" name="titleInp" id="titleInp" placeholder="Rubrik" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} />
+                    <input type="text" name="titleInp" id="titleInp" placeholder="Title" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} />
                     {formErrors.titleErr && <span className="error">{ formErrors.titleErr }</span>}
                 </div>
 
                 <div>
                     <label htmlFor="descrInp"></label>
-                    <textarea name="descrInp" id="descrInp" placeholder="Beskrivning" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} />
+                    <textarea name="descrInp" id="descrInp" placeholder="Description" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} />
                     {formErrors.descrErr && <span className="error">{ formErrors.descrErr }</span>}
                 </div>
 
                 <div>
-                    <label htmlFor="ratingInp">Betyg: </label>
-                    <input type="number" name="ratingInp" id="ratingInp" placeholder="Betyg" value={formData.rating} onChange={(e) => setFormData({...formData, rating: Number(e.target.value)})} />
+                    <label htmlFor="ratingInp">Rating: </label>
+                    <input type="number" name="ratingInp" id="ratingInp" placeholder="Rating" value={formData.rating} onChange={(e) => setFormData({...formData, rating: Number(e.target.value)})} />
                     {formErrors.ratingErr && <span className="error">{ formErrors.ratingErr }</span>}
                 </div>
 
@@ -92,7 +92,7 @@ export const ReviewForm = ({ gameId, updateList }: { gameId: number, updateList:
                 {message !== "" && <span className="confirm">{ message }</span>}
 
                 {/* Submit button */}
-                <input type="submit" className="btn" value="Dela recension" disabled={loading}/>
+                <input type="submit" className="btn" value="Share review" disabled={loading}/>
             </div>
         </form>
     )

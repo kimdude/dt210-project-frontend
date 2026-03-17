@@ -13,8 +13,8 @@ export const ListGamesPage = () => {
 
       {/* Title */}
       <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-        <h1>Sparade spel</h1>
-        <small>Totalt: { data.list?.length }</small>
+        <h1>Saved games</h1>
+        <small>Total: { data.list ? data.list.length : 0  }</small>
       </div>
 
       {/* Listing games */}
@@ -22,7 +22,7 @@ export const ListGamesPage = () => {
         data.list?.map((game) => (
           <ListItem key={game._id} game={game} updateList={fetchData} />
         ))
-        : <small>Inga sparade spel</small> 
+        : <small>No saved games</small> 
       }
 
       {/* Loading icon */}

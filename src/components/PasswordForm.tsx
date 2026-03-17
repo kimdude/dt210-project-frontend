@@ -20,7 +20,7 @@ export const PasswordForm = ({displayForm}: {displayForm: any}) => {
     useEffect(() => {
 
         if(data) {
-            setMessage("Lösenordet har uppdaterats!");
+            setMessage("Password has been updated!");
 
             setPassword("");
             setNewPassword("");
@@ -34,15 +34,15 @@ export const PasswordForm = ({displayForm}: {displayForm: any}) => {
         const validationErrors: PasswordFormErrors = {};
 
         if(password === "" || password.length < 8) {
-            validationErrors.passwordErr = "Ange ditt nuvarande lösenord.";
+            validationErrors.passwordErr = "Current password required.";
         }
 
         if(newPassword.length < 8) {
-            validationErrors.newPasswordErr = "Lösenordet måste vara över 8 tecken.";
+            validationErrors.newPasswordErr = "New password must be atleast 8 characters long.";
         }
 
         if(confirmPassword !== newPassword) {
-            validationErrors.confirmPasswordErr = "Lösenordet stämmer inte överens.";
+            validationErrors.confirmPasswordErr = "Password doesn't match new password.";
         }
 
         return validationErrors;
@@ -71,7 +71,7 @@ export const PasswordForm = ({displayForm}: {displayForm: any}) => {
 
             {/* Title */}
             <div className="passwordTitle">
-                <h2>Byt lösenord</h2>
+                <h2>Change password</h2>
                 <button type="button" onClick={() => displayForm(false)}>
                     <span></span>
                     <span></span>
@@ -80,26 +80,26 @@ export const PasswordForm = ({displayForm}: {displayForm: any}) => {
 
             <div>
                 <label htmlFor="password"></label>
-                <input type="password" name="password" id="password" placeholder="Ditt lösenord" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="password" name="password" id="password" placeholder="Current password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 {inputErrors.passwordErr && <span className="error">{ inputErrors.passwordErr }</span>}
             </div>
 
             <div>
                 <label htmlFor="newPassword"></label>
-                <input type="password" name="newPassword" id="newPassword" placeholder="Nytt lösenord" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                <input type="password" name="newPassword" id="newPassword" placeholder="New password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                 {inputErrors.newPasswordErr && <span className="error">{ inputErrors.newPasswordErr }</span>}
             </div>
 
             <div>
                 <label htmlFor="confirmPassword"></label>
-                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Bekräfta lösenord" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                 {inputErrors.confirmPasswordErr && <span className="error">{ inputErrors.confirmPasswordErr }</span>}
             </div>
 
             {/* Submit button */}
             {error && <span className="error" style={{marginTop: "20px"}}>{ error }</span>}
             { message && <span className="confirm">{ message }</span>}
-            <input type="submit" className="btn" value="Byt lösenord" disabled={loading} />
+            <input type="submit" className="btn" value="Update" disabled={loading} />
         </form>
     )
 }

@@ -14,9 +14,9 @@ export const Banner = () => {
 
         {/* Intro text */}
         <div>
-            <p>Hitta kostnadsfria datorspel som passar dig.</p>
-            <p><strong>Eller var med och rekommendera spel!</strong></p>
-            <Link to="/login" className="btn">Registrera dig</Link>
+            <p>Find free computer games to enjoy playing.</p>
+            <p><strong>Or help us recommend games!</strong></p>
+            <Link to="/login" className="btn">Register</Link>
         </div>
     </div>
   )

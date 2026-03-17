@@ -28,49 +28,49 @@ export const ProfilePage = () => {
         <div>
             {/* Settings */}
             <nav className="profileSettings">
-                <li className="spanBtn" onClick={() => setDisplaySettings(!displaySettings)}>Byt lösenord</li>
-                <li className="spanBtn" onClick={() => logout()}>Logga ut</li>
+                <li className="spanBtn" onClick={() => setDisplaySettings(!displaySettings)}>Change password</li>
+                <li className="spanBtn" onClick={() => logout()}>Log out</li>
             </nav>
 
             <div className="profileTitle">
-                <h1>Välkommen { user?.displayName }!</h1>
-                <p>Användarnamn: <strong>{ user?.username }</strong></p>
+                <h1>Welcome { user?.displayName }!</h1>
+                <p>Username: <strong>{ user?.username }</strong></p>
             </div>
 
             {/* List with saved games */}
             <section className="profileSaved">
                 <div>
-                    <h2>Sparade spel</h2>
-                    <small>Totalt: { games?.list?.length }</small>
+                    <h2>Saved games</h2>
+                    <small>Total: { games?.list ? games?.list?.length : 0 }</small>
                 </div>
                 { games?.list ? 
                     games.list.slice(0,3).map((game: any) => (
                         <ListItem key={game.gameId} game={game} updateList={fetchGames} />
                     )) 
                     : loadingGames ? <PacmanLoader color="#FEDE5D" className="spinner" />
-                    : <small>Inga sparade spel</small>
+                    : <small>No saved games</small>
                 }
 
                 {/* Navigating to list-page and sending title + type */}
-                <button className="btn" onClick={() => navigate("/details/saved-games",{ state: { title: "Sparade spel", type: "Din profil" }})}>Se hela listan</button>
+                <button className="btn" onClick={() => navigate("/details/saved-games",{ state: { title: "Saved games", type: "Your profile" }})}>See all</button>
             </section>
 
             {/* List with shared reviews */}
             <section className="profileReviews">
                 <div>
-                    <h2>Dina recensioner</h2>
-                    <small>Totalt: { reviews?.length }</small>
+                    <h2>Your reviews</h2>
+                    <small>Total: { reviews?.length }</small>
                 </div>
                 { reviews.length > 0 ?
                     reviews.slice(0,3).map((review: any) => (
                         <ReviewItem key={review._id} review={review} updateList={fetchReviews} />
                     )) 
                     : loadingReviews ?  <PacmanLoader color="#FEDE5D" className="spinner" />
-                    : <small>Inga delade recensioner</small>
+                    : <small>No shared reviews</small>
                 }
           
                 {/* Navigating to list-page and sending title + type */}
-                <button className="btn" onClick={() => navigate("/details/shared-reviews",{ state: { title: "Dina recensioner", type: "Din profil" }})}>Se hela listan</button>
+                <button className="btn" onClick={() => navigate("/details/shared-reviews",{ state: { title: "Your reviews", type: "Your profile" }})}>See all</button>
             </section>
 
             {/* Editing password */}

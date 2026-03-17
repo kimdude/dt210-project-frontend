@@ -11,7 +11,7 @@ export const GameItem = ({game}: {game: GameOverview}) => {
   const navigate = useNavigate();
 
   return (
-    <article className="gameOverview" style={{ backgroundImage: `url(${game.thumbnail})` }} onClick={() => navigate("/details/"+ game.title + "/" + game.id, {state: { type: "Spel", title: game.title }})}>
+    <article className="gameOverview" style={{ backgroundImage: `url(${game.thumbnail})` }} onClick={() => navigate("/details/"+ game.title + "/" + game.id, {state: { type: "Games", title: game.title }})}>
       <div>
 
         {/* Category */}
@@ -28,12 +28,12 @@ export const GameItem = ({game}: {game: GameOverview}) => {
         {/* Game info */}
         <div className="gameOverviewDev">
           <div>
-            <img src={platformIcon} alt="Plattform" width="15" />
+            <img src={platformIcon} alt="Platform" width="15" />
             <p>{ game.platform }</p>
           </div>
 
           <div>
-            <img src={devIcon} alt="Utvecklare" width="15" />
+            <img src={devIcon} alt="Developer" width="15" />
             <p>{ game.developer }</p>
           </div>
         </div>

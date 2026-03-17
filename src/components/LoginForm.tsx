@@ -27,11 +27,11 @@ export const LoginForm = () => {
     let validationErrors: UserFormErrors = {};
 
     if(username === "" || username.length < 4) {
-      validationErrors.usernameErr = "Ange användarnamn.";
+      validationErrors.usernameErr = "Username must be over 4 characters long.";
     }
 
     if(password === "" || password.length < 8) {
-      validationErrors.passwordErr = "Ange lösenord.";
+      validationErrors.passwordErr = "Password required.";
     }
 
     return validationErrors;
@@ -54,23 +54,23 @@ export const LoginForm = () => {
     try {
       await login({username, password});
     } catch(error) {
-      setErrors(prev => ({...prev, loginErr: "Inloggning misslyckades. Kontrollera användarnamn och lösenord."}));
+      setErrors(prev => ({...prev, loginErr: "Login failed. Check username and password."}));
     }
   }
 
   return (
     <form className="loginContainer" onSubmit={submit}>
-        <h1>Logga in</h1>
+        <h1>Login</h1>
         <label htmlFor="usernameInp"></label>
-        <input type="text" name="usernameInp" id="usernameInp" placeholder="Användarnamn" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input type="text" name="usernameInp" id="usernameInp" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
         { errors.usernameErr && <span className="error">{errors.usernameErr}</span>}
 
         <label htmlFor="passwordInp"></label>
-        <input type="password" name="passwordInp" id="passwordInp" placeholder="Lösenord" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="password" name="passwordInp" id="passwordInp" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         { errors.passwordErr && <span className="error">{errors.passwordErr}</span>}
 
         { errors.loginErr && <span className="error">{errors.loginErr}</span>}
-        <input type="submit" value="Logga in" className="btn" />
+        <input type="submit" value="Log in" className="btn" />
     </form>
   )
 }

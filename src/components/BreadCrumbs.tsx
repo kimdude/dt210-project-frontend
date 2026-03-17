@@ -19,13 +19,13 @@ export const BreadCrumbs = () => {
         path: "" 
     }
 
-    if(type === "Spel") {
+    if(type === "Games") {
         crumb.path = "/games";
 
-    } else if (type === "Din profil") {
+    } else if (type === "Your profile") {
         crumb.path = "/profile";
     } else {
-        crumb.breadcrumb = "Hem",
+        crumb.breadcrumb = "Home",
         crumb.path = "/"
     }
 

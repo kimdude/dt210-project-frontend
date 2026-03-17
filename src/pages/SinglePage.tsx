@@ -39,11 +39,11 @@ export const SinglePage = () => {
   useEffect(() => {
 
     if(saveError !== null && saveError !== "" ) {
-      newMessage("Det gick inte att spara spelet. Prova igen senare.");
+      newMessage("Couldn't save game to list. Please try again later.");
     }
 
     if(deleteError !== null && deleteError !== "") {
-      newMessage("Det gick inte att ta bort från listan. Prova igen senare.");
+      newMessage("Couldn't remove game from list. Please try again later.");
     }
 
   }, [saveError, deleteError]);
@@ -63,7 +63,7 @@ export const SinglePage = () => {
   const saveGame = async() => {
 
     if(!user) {
-      newMessage("Logga in för att spara spelet ►");
+      newMessage("Log in or register to save ►");
       return;
     }
 
@@ -93,7 +93,7 @@ export const SinglePage = () => {
       <div className="singleTitle">
         <div>
           <h1>{ data.title }</h1>
-          <p>Kategori: <strong>{ data.genre }</strong></p>
+          <p>Category: <strong>{ data.genre }</strong></p>
         </div>
 
         {/* Save game */}
@@ -120,17 +120,17 @@ export const SinglePage = () => {
 
         {/* Details */}
         <div className="singleDetailsDev">
-          <small>Utgivningsdatum: <strong>{ data.releaseDate }</strong></small>
-          <small>Utvecklare: <strong>{ data.developer }</strong></small>
-          <small>Utgivare: <strong>{ data.publisher }</strong></small>
-          <small>Plattform: <strong>{ data.platform }</strong></small>
+          <small>Released: <strong>{ data.releaseDate }</strong></small>
+          <small>Developer: <strong>{ data.developer }</strong></small>
+          <small>Publisher: <strong>{ data.publisher }</strong></small>
+          <small>Platform: <strong>{ data.platform }</strong></small>
         </div>
 
         {/* Title and score */}
         <div className="singleDetailsTitle">
           <div>
-            <h2>Om spelet</h2>
-            <p>Genomsnittsbetyg: {data.score ? <span>{ data.score } / 5</span> : <span className="missingData">Inga betygsättningar ännu</span> }</p>
+            <h2>Summary</h2>
+            <p>Average rating: {data.score ? <span>{ data.score } / 5</span> : <span className="missingData">No ratings yet</span> }</p>
           </div>
 
           {/* Score icon */}
@@ -150,8 +150,8 @@ export const SinglePage = () => {
       {/* Reviews */}
       <div className="gameReviews" onScroll={(e) => scrollToBottom(e.currentTarget)}>
         <div className="gameReviewsTitle">
-          <h2>Recensioner</h2>
-          <small>Totalt: {data.reviews ? <span>{data.reviews.length}</span> : <span>0</span> } </small>
+          <h2>Reviews</h2>
+          <small>Total: {data.reviews ? <span>{data.reviews.length}</span> : <span>0</span> } </small>
         </div>
 
         {/* Review articles */}
@@ -159,7 +159,7 @@ export const SinglePage = () => {
           <ReviewItem key={item._id} review={item} updateList={fetchData} />
         ))}
 
-        {data.reviews?.length === 0 && <span className="missingData">Inga recensioner ännu</span>}
+        {data.reviews?.length === 0 && <span className="missingData">No reviews yet</span>}
 
         {/* Shadow if more reviews are below */}
         {!reachedEnd && <div className="scrollShadow"></div>}
@@ -169,7 +169,7 @@ export const SinglePage = () => {
       <ReviewForm gameId={Number(_id)} updateList={fetchData} />
 
       {/* Confirmation messages */}
-      { message === "Logga in för att spara spelet ►" ? <Link to="/login" className="popUp">{ message } </Link> : message !== "" && 
+      { message === "Log in or register to save ►" ? <Link to="/login" className="popUp">{ message } </Link> : message !== "" && 
         <span className="popUp">{ message }</span>}
 
     </section>

@@ -45,7 +45,7 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
     //Updating message when data changes or error during delete occurs
     useEffect(() => {
         if(data) {
-            newMessage("Recensionen har uppdaterats.");
+            newMessage("Review has been updated!");
             editForm();
             updateList();
             return;
@@ -57,7 +57,7 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
         }
 
         if(deleteError) {
-            newMessage("Ett fel uppstod. Prova igen senare.");
+            newMessage("Couldn't delete review. Please try again later.");
         }
 
     }, [data, deleteError, dataDeleted]);
@@ -73,15 +73,15 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
         const validationErrors: ReviewFormErrors = {};
 
         if(formData.title.length < 3 || formData.title.length > 20) {
-            validationErrors.titleErr = "Rubriken måste vara mellan 3-20 tecken lång.";
+            validationErrors.titleErr = "Title must be between 3-20 characters long.";
         }
 
         if(formData.description.length < 5) {
-            validationErrors.descrErr = "Beskrivningen måste vara över 5 tecken lång.";
+            validationErrors.descrErr = "Description must be atleast 5 characters long.";
         }
 
         if(formData.rating < 1 || formData.rating > 5) {
-            validationErrors.ratingErr = "Betyg måste vara på skalan 1-5";
+            validationErrors.ratingErr = "Rating must be on a scale of 1-5.";
         }
 
         return validationErrors;
@@ -110,15 +110,15 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
             {/* Text for reviews displayed on profile */}
             { parent === "private" && 
                 <div className="reviewProfileSettings">
-                    <p>Spel: { (review as ProfileReview).gameDetails?.name }</p>
+                    <p>Game: { (review as ProfileReview).gameDetails?.name }</p>
                     <button onClick={() => setDisplayMenu(!displayMenu)}><img src={settingsIcon} alt="Hantera recension" width="30"/></button>
 
                     {/* Setting nav */}
                     {displayMenu &&
                         <nav className="reviewSettingsNav">
                             <ul>
-                                <li onClick={() => editForm()}>Redigera recension</li>
-                                <li onClick={() => deleteData()}>Ta bort recension</li>
+                                <li onClick={() => editForm()}>Edit review</li>
+                                <li onClick={() => deleteData()}>Delete review</li>
                             </ul>
                         </nav>
                     }
@@ -126,7 +126,7 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
             }
 
             {/* Text for reviews on public pages */}
-            { parent === "public" && <p>Användare: { (review as Review).displayName }</p>}
+            { parent === "public" && <p>By <strong>{ (review as Review).displayName }</strong></p>}
 
             {/* Star icons */}
             <div className="reviewRatings">
@@ -148,7 +148,7 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
                 <form className="editReviewForm" onSubmit={updateReview}>
                     {/* Title */}
                     <div className="passwordTitle">
-                        <h4>Redigera recension</h4>
+                        <h4>Edit review</h4>
                         <button type="button" onClick={() => setDisplayForm(false)}>
                             <span></span>
                             <span></span>

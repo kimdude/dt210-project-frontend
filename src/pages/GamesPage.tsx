@@ -52,13 +52,13 @@ export const GamesPage = () => {
       {/* Search bar */}
       <div className="gameSearchContainer">
         <label htmlFor="searchBar"></label>
-        <input type="text" id="searchBar" placeholder="Sök spel" onChange={(e) => setSearchPhrase(e.target.value)} onKeyDown={(e) => e.key === "Enter" && search()} />
-        <button className="btn" onClick={search}>Sök</button>
+        <input type="text" id="searchBar" placeholder="Game title" onChange={(e) => setSearchPhrase(e.target.value)} onKeyDown={(e) => e.key === "Enter" && search()} />
+        <button className="btn" onClick={search}>Search</button>
       </div>
 
       {/* All games */}
       <div className="gameTitle">
-        <h1>Datorspel</h1>
+        <h1>Games</h1>
         <small className="spanBtn" onClick={() => setDisplayFilters(!displayFilters)}>Filter</small>
       </div>
 
@@ -69,7 +69,7 @@ export const GamesPage = () => {
       {loading && <PacmanLoader color="#FEDE5D" className="spinner" />}
 
       {/* Message */}
-      {filteredGames.length === 0 && !loading && <p>Inga spel hittades.</p>}
+      {filteredGames.length === 0 && !loading && <p>No games found</p>}
 
       {/* Error */}
       {error && <p>{ error }</p>}

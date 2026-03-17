@@ -16,11 +16,11 @@ export const Header = () => {
       {/* Min nav */}
       <nav className="mainNav">
         <ul>
-          <li><NavLink to="/">Hem</NavLink></li>
-          <li><NavLink to="/games">Spel</NavLink></li>
+          <li><NavLink to="/">Home</NavLink></li>
+          <li><NavLink to="/games">Games</NavLink></li>
 
           {
-            user ? <li><NavLink to="/profile">Din profil</NavLink></li> : <li><NavLink to="/login">Logga in</NavLink></li>
+            user ? <li><NavLink to="/profile">Your profile</NavLink></li> : <li><NavLink to="/login">Login</NavLink></li>
           }
         </ul>
       </nav>

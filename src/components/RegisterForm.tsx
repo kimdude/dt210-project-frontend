@@ -16,7 +16,7 @@ export const RegisterForm = () => {
   //Updating message
   useEffect(() => {
     if(data?.message) {
-      setMessage("Du har registrerats!");
+      setMessage("You're registerd!");
       setFormData({ username: "", displayName: "", password: ""});
     }
 
@@ -27,15 +27,15 @@ export const RegisterForm = () => {
     const validationErrors: UserFormErrors = {};
 
     if(formData.username.length < 4 || formData.username.length > 15 ) {
-      validationErrors.usernameErr = "Användarnamn måste vara mellan 4-15 tecken långt.";
+      validationErrors.usernameErr = "Username must be between 4-15 characters long.";
     }
 
     if(!formData.displayName || formData.displayName.length < 4 || formData.displayName.length >15 ) {
-      validationErrors.displayNameErr = "Ditt synliga namn måste vara mellan 4-15 tecken långt.";
+      validationErrors.displayNameErr = "Your visible name must be between 4-15 characters long.";
     }
 
     if(formData.password.length < 8) {
-      validationErrors.passwordErr = "Lösenordet måste vara minst 8 tecken långt.";
+      validationErrors.passwordErr = "Password must be atleast 8 characters long.";
     }
 
     return validationErrors;
@@ -61,22 +61,22 @@ export const RegisterForm = () => {
 
   return (
     <form className="loginContainer" onSubmit={registerUser}>
-        <h1>Registrera dig</h1>
+        <h1>Register</h1>
         <label htmlFor="usernameInp"></label>
-        <input type="text" name="usernameInp" id="usernameInp" placeholder="Användarnamn" value={ formData.username } onChange={(e) => setFormData({...formData, username: e.target.value})} />
+        <input type="text" name="usernameInp" id="usernameInp" placeholder="Username" value={ formData.username } onChange={(e) => setFormData({...formData, username: e.target.value})} />
         {errors.usernameErr && <span className="error">{ errors.usernameErr }</span>}
 
         <label htmlFor="displayNameInp"></label>
-        <input type="text" name="displayNameInp" id="displayNameInp" placeholder="Synligt namn" value={ formData.displayName } onChange={(e) => setFormData({...formData, displayName: e.target.value})} />
+        <input type="text" name="displayNameInp" id="displayNameInp" placeholder="Visible name" value={ formData.displayName } onChange={(e) => setFormData({...formData, displayName: e.target.value})} />
         {errors.displayNameErr && <span className="error">{ errors.displayNameErr }</span>}
 
         <label htmlFor="passwordInp"></label>
-        <input type="password" name="passwordInp" id="passwordInp" placeholder="Lösenord" value={ formData.password } onChange={(e) => setFormData({...formData, password: e.target.value})} />
+        <input type="password" name="passwordInp" id="passwordInp" placeholder="Password" value={ formData.password } onChange={(e) => setFormData({...formData, password: e.target.value})} />
         {errors.passwordErr && <span className="error">{ errors.passwordErr }</span>}
 
         { error && <span className="error">{ error }</span>}
         { message && <span className="confirm">{ message }</span>}
-        <input type="submit" value="Registrera dig" className="btn" disabled={loading} />
+        <input type="submit" value="Register" className="btn" disabled={loading} />
     </form>
   )
 }
