@@ -2,67 +2,44 @@ import { Link, useLocation } from "react-router-dom"
 import "./BreadCrumbs.css"
 
 interface Breadcrumb {
-    title: string,
+    breadcrumb: string,
     path: string
 }
 
 export const BreadCrumbs = () => {
+
+    // Getting states from location 
     const location = useLocation();
+    const { type, title } = location.state;
 
-    const allcrumbs: Breadcrumb[] = [];
-    const path = location.pathname;
+    // Creating crumbs with paths
+    const allCrumbs: Breadcrumb[] = [];
+    let crumb: Breadcrumb = {
+        breadcrumb: type,
+        path: "" 
+    }
 
-   //Getting previous page title
-    const startCrumb = location.state?.type;
-    let startPath;
+    if(type === "Spel") {
+        crumb.path = "/games";
 
-    if(startCrumb === "Spel") {
-        startPath = "/games"
-    } else if(startCrumb === "Din profil") {
-        startPath = "/profile"
+    } else if (type === "Din profil") {
+        crumb.path = "/profile";
     } else {
-        startPath = "/"
+        crumb.breadcrumb = "Hem",
+        crumb.path = "/"
     }
 
-    const completeStartCrumb = {
-        title: startCrumb,
-        path: startPath
-    }
-
-    allcrumbs.push(completeStartCrumb);
-
-    //Replacing symbols with spaces in title
-    const formatTitle = (title: string) => {
-        const titleArr = title.split("%20");
-        const result = titleArr.join(" ");
-
-        const newCrumb: Breadcrumb = {
-            title: result,
-            path: ""
-        }
-
-        allcrumbs.push(newCrumb);
-    }
-
-    //Filtering for page title in url
-    const page = path.split("/").filter(crumb => crumb !== "" && crumb !== "details" && isNaN(Number(crumb)));
-    page.map((title) => formatTitle(title));
-
+    allCrumbs.push(crumb)
+    allCrumbs.push({breadcrumb: title, path: ""});
+    
     return (
         <ul className="breadcrumbs">
-            {allcrumbs.map((breadcrumb, index) => (
-                <li key={index}>
-                    {
-                        breadcrumb.path &&
-                        <Link to={breadcrumb.path}>
-                            { breadcrumb.title }
-                        </Link>
-                    }
-                    {
-                        breadcrumb.path === "" &&
-                        breadcrumb.title
-                    }
-                </li>
+            {allCrumbs.length > 0 && allCrumbs.map((breadcrumb, index) => (
+
+                breadcrumb.path !== null && breadcrumb.path !== "" 
+                ? <li key={index}><Link to={breadcrumb.path}>{ breadcrumb.breadcrumb }</Link></li>
+                : <li key={index}>{ breadcrumb.breadcrumb }</li>
+
             ))}
         </ul>
     )

@@ -27,7 +27,7 @@ export default function useDelete(url: string) : { data: string | null,loading: 
                 throw new Error("Ett fel uppstod. Prova igen senare.");
             }
 
-            const finalResult = await result.json();
+            await result.json();
             setData("Objekt borttaget");
 
         } catch (err) {

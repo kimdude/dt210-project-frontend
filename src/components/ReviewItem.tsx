@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import type { ProfileReview, Review } from "../types/ReviewTypes"
+import type { ReviewFormData, ReviewFormErrors, ProfileReview, Review } from "../types/ReviewTypes"
 
 import settingsIcon from "../assets/settingsIcon.svg"
 
 import "./ReviewItem.css"
 import useDelete from "../hooks/useDelete";
+import usePut from "../hooks/usePut";
 
 export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview, updateList: () => void }) => {
 
@@ -14,10 +15,14 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
     //States
     const [ parent, setParent ] = useState<string>("public");
     const [ displayMenu, setDisplayMenu ] = useState<boolean>(false);
-    const [ displayForm, setForm ] = useState<boolean>(false);
+    const [ displayForm, setDisplayForm ] = useState<boolean>(false);
+    const [ formData, setFormData ] = useState<ReviewFormData>({title: review.title, description: review.description, rating: review.rating});
+    const [ formErrors, setFormErrors ] = useState<ReviewFormErrors>({});
+    const [ message, setMessage ] = useState<string>("");
 
     //Hooks
-    const { deleteError, deleteData } = useDelete("https://dt210g-project-backend-hapi.onrender.com/games/reviews/" + review._id);
+    const { deleteError, data: dataDeleted, deleteData } = useDelete("https://dt210g-project-backend-hapi.onrender.com/games/reviews/" + review._id);
+    const { data, error, loading, putData } = usePut<Review>("https://dt210g-project-backend-hapi.onrender.com/games/reviews/" + review._id);
 
     //Checking if parent is profile-page or not
     useEffect(() => {
@@ -28,14 +33,80 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
 
     }, []);
 
-    //Deleting review 
-    const deleteReview = async() => {
-        await deleteData();
-        updateList();
+    //Displaying message for limited time
+    const newMessage = (text: string) => {
+        setMessage(text);
+
+        setTimeout(() => {
+        setMessage("")
+    }, 5000);
+    }
+
+    //Updating message when data changes or error during delete occurs
+    useEffect(() => {
+        if(data) {
+            newMessage("Recensionen har uppdaterats.");
+            editForm();
+            updateList();
+            return;
+        }
+
+        if(dataDeleted) {
+            updateList();
+            return;
+        }
+
+        if(deleteError) {
+            newMessage("Ett fel uppstod. Prova igen senare.");
+        }
+
+    }, [data, deleteError, dataDeleted]);
+
+    //Toggle editing form
+    const editForm = () => {
+        setDisplayForm(!displayForm);
+        setDisplayMenu(false);
+    }
+
+    //Validating form
+    const validate = () => {
+        const validationErrors: ReviewFormErrors = {};
+
+        if(formData.title.length < 3 || formData.title.length > 20) {
+            validationErrors.titleErr = "Rubriken måste vara mellan 3-20 tecken lång.";
+        }
+
+        if(formData.description.length < 5) {
+            validationErrors.descrErr = "Beskrivningen måste vara över 5 tecken lång.";
+        }
+
+        if(formData.rating < 1 || formData.rating > 5) {
+            validationErrors.ratingErr = "Betyg måste vara på skalan 1-5";
+        }
+
+        return validationErrors;
+    }
+
+    //Updating review
+    const updateReview = async(e: React.SubmitEvent<HTMLElement>) => {
+        e.preventDefault();
+        setFormErrors({});
+        setMessage("");
+
+        //Validating inputs
+        const validationErrors = validate();
+
+        if(Object.keys(validationErrors).length > 0) {
+            setFormErrors(validationErrors);
+            return;
+        }
+
+        await putData(formData);
     }
 
     return (
         <article className="reviewContainer">
+
             {/* Text for reviews displayed on profile */}
             { parent === "private" && 
                 <div className="reviewProfileSettings">
@@ -46,8 +117,8 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
                     {displayMenu &&
                         <nav className="reviewSettingsNav">
                             <ul>
-                                <li>Redigera recension</li>
-                                <li onClick={() => deleteReview()}>Radera recension</li>
+                                <li onClick={() => editForm()}>Redigera recension</li>
+                                <li onClick={() => deleteData()}>Ta bort recension</li>
                             </ul>
                         </nav>
                     }
@@ -70,9 +141,53 @@ export const ReviewItem = ({review, updateList}: {review: Review | ProfileReview
             <h3>{ review.title }</h3>
             <p>{ review.description }</p>
             <small>{ formattedDate }</small>
+            
+            {/* Editing-form */}
+            {
+                displayForm &&
+                <form className="editReviewForm" onSubmit={updateReview}>
+                    {/* Title */}
+                    <div className="passwordTitle">
+                        <h4>Redigera recension</h4>
+                        <button type="button" onClick={() => setDisplayForm(false)}>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <label htmlFor="titleInp"></label>
+                        <input type="text" name="titleInp" id="titleInp" placeholder="Rubrik" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} />
+                        {formErrors.titleErr && <span className="error">{ formErrors.titleErr }</span>}
+                    </div>
+
+                    <div>
+                        <label htmlFor="descrInp"></label>
+                        <textarea name="descrInp" id="descrInp" placeholder="Beskrivning" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} />
+                        {formErrors.descrErr && <span className="error">{ formErrors.descrErr }</span>}
+                    </div>
+
+                    <div>
+                        <label htmlFor="ratingInp">Betyg: </label>
+                        <input type="number" name="ratingInp" id="ratingInp" placeholder="Betyg" value={formData.rating} onChange={(e) => setFormData({...formData, rating: Number(e.target.value)})} />
+                        {formErrors.ratingErr && <span className="error">{ formErrors.ratingErr }</span>}
+                    </div>
+
+                    {/* Errors and messages*/}
+                    {error && <span className="error">{ error }</span>}
+
+                    {/* Submit button */}
+                    <input type="submit" className="btn" value="Uppdatera" disabled={loading}/>
+
+                </form>
+            }
 
             {/* Error message */}
-            { deleteError && <small className="error">{ deleteError }</small>}
+            { deleteError && <small className="popup">{ deleteError }</small>}
+
+            {/* Confirmation messages */}
+            {message !== "" && <span className="popUp">{ message }</span>}
+
         </article>
     )
 }

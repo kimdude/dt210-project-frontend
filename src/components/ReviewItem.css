@@ -46,3 +46,21 @@
     cursor: pointer;
     background-color: #c5c5c5;
 }
+
+/* Form */
+.editReviewForm {
+    z-index:  1000;
+    position: fixed;
+    top: 25%;
+    left: 15%;
+    width: 60%;
+    padding: 20px 4vw;
+    border-radius: 10px;
+    background-color: #F2F1EF;
+    color: black !important;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.4);
+}
+
+.editReviewForm > div:not(:first-of-type) {
+    margin: 10px 0px;
+}

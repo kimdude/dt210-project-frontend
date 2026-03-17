@@ -25,8 +25,8 @@ export const SinglePage = () => {
   const { user } = useAuth();
 
   const { data, loading, error, fetchData } = useGet<GameDetails>("https://dt210g-project-backend-hapi.onrender.com/games/" + _id, true);
-  const { postData, data: saveData, error: saveError } = usePost("https://dt210g-project-backend-hapi.onrender.com/saved/" + _id, true);
-  const { deleteData, data: dataDeleted, deleteError } = useDelete("https://dt210g-project-backend-hapi.onrender.com/saved/" + data.externalId);
+  const { postData, error: saveError } = usePost("https://dt210g-project-backend-hapi.onrender.com/saved/" + _id, true);
+  const { deleteData, deleteError } = useDelete("https://dt210g-project-backend-hapi.onrender.com/saved/" + data.externalId);
 
   //Initialising scroll-shadow if there are several reviews
   useEffect(() => {
