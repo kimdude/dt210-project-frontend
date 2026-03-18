@@ -76,3 +76,8 @@
     border-radius: 10px;
     background-color: #FEDE5D;
 }
+
+/* Screens under 640px */
+@media screen and (max-width: 640px) {
+
+}

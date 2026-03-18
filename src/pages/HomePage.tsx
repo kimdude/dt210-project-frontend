@@ -19,7 +19,7 @@ export const HomePage = () => {
         <h1>Top games</h1>
 
         {/* Listing games */}
-        <div className="gamesContainer">
+        <div className="gamesGrid">
           { popularGames && popularGames.slice(0,6).map((game) => (
               <GameItem key={game.id} game={game} />
             ))
@@ -38,7 +38,7 @@ export const HomePage = () => {
         <h1>Latest releases</h1>
 
         {/* Listing games */}
-        <div className="gamesContainer">
+        <div className="gamesGrid">
           { releasedGames && releasedGames.slice(0,6).map((game) => (
               <GameItem key={game.id} game={game} />
             ))

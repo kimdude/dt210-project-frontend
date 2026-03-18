@@ -160,10 +160,10 @@ input[type=number] {
 }
 
 /* Game container */
-.gamesContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.gamesGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 /* Animations */

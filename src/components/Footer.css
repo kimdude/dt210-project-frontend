@@ -20,3 +20,9 @@ footer a {
     display: block;
     margin: auto;
 }
+
+/* Screens under 640px */
+@media screen and (max-width: 640px) {
+    footer { flex-direction: column; text-align: center;}
+    .footerLogo { margin: 20px auto; }
+}
