@@ -5,6 +5,11 @@
     width: 100%;
 }
 
+.singleTitle h1 {
+    text-wrap: wrap;
+    margin-right: 20px;
+}
+
 .missingData {
     font-style: italic;
 }
