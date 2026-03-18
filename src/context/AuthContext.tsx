@@ -18,7 +18,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
 
     //Validating token
     useEffect(() => {
-        validateToken();
+
+        const checkToken = async() => {
+            await validateToken();
+        }
+
+        checkToken();
     }, []);
 
     //Logging in user

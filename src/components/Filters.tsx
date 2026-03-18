@@ -59,6 +59,7 @@ export const Filters = ({setQuery, toggleFilter}: {setQuery: any, toggleFilter: 
                     </select>
                 </div>
 
+            {/* Submit */}
             <input type="submit" value="Filter" className="btn submitBtn" onClick={setFilters}/>
         </form>
     )

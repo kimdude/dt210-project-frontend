@@ -11,6 +11,7 @@ import { SinglePage } from "./pages/SinglePage";
 import { ListGamesPage } from "./pages/ListGamesPage";
 import { ListReviewsPage } from "./pages/ListReviewsPage";
 
+//Browser router
 const router = createBrowserRouter([
     {
         path: "/",

@@ -29,11 +29,14 @@ export const BreadCrumbs = () => {
         crumb.path = "/"
     }
 
+    // Pushing crumbs into array
     allCrumbs.push(crumb)
     allCrumbs.push({breadcrumb: title, path: ""});
     
     return (
         <ul className="breadcrumbs">
+
+            {/* Listing crumbs */}
             {allCrumbs.length > 0 && allCrumbs.map((breadcrumb, index) => (
 
                 breadcrumb.path !== null && breadcrumb.path !== "" 

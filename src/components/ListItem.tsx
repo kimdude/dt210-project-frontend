@@ -18,7 +18,7 @@ export const ListItem = ({game, updateList}: {game: SavedGame, updateList: () =>
 
     return (
         <article style={{display: "flex", justifyContent: "space-between", backgroundColor: "rgba(30,44,94,0.7)", padding: "5px 20px", margin: "10px 0px", borderRadius: "10px"}}>
-            <h3 onClick={() => navigate( gameUrl, {state: { type: "Sparade spel" }})}>{ game.name }</h3>
+            <h3 onClick={() => navigate( gameUrl, {state: { type: "Sparade spel", title: game.name}})}>{ game.name }</h3>
 
             {/* Remove button */}
             <button className="crossBtn white" onClick={() => deleteData()} aria-label="Remove from list" title="Remove">
