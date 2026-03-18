@@ -54,8 +54,8 @@ export const Pagination = ({data}: {data: GameOverview[]}) => {
         console.log(totalPages)
         
         //Calculating closest pages
-        const startPage = Math.max(1, currentPage -4); //Returns 4 previous page numbers unless they're lower then 1
-        const endPage = Math.min(totalPages, currentPage +4); //Returns next 4 page numbers unless they're over the total
+        const startPage = Math.max(1, currentPage -3); //Returns 4 previous page numbers unless they're lower then 1
+        const endPage = Math.min(totalPages, currentPage +3); //Returns next 4 page numbers unless they're over the total
 
         //Pushing 4 previous and 4 upcoming pages into array
         const pageOptions = [];
