@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import useGet from "../hooks/useGet";
 import { Link, useParams } from "react-router-dom";
 import { PacmanLoader } from "react-spinners";
@@ -17,8 +17,9 @@ import { useAuth } from "../context/AuthContext";
 export const SinglePage = () => {
 
   //States
-  const [ reachedEnd, setReachedEnd ] = useState<boolean>(true);
   const [ message, setMessage ] = useState<string>("");
+  const [ reachedEnd, setReachedEnd ] = useState<boolean>(true);
+  const reviewContainer = useRef<HTMLDivElement | null>(null);
 
   //Hooks
   const { _id } = useParams<{_id: string}>();
@@ -28,11 +29,23 @@ export const SinglePage = () => {
   const { postData, error: saveError } = usePost("https://dt210g-project-backend-hapi.onrender.com/saved/" + _id, true);
   const { deleteData, deleteError } = useDelete("https://dt210g-project-backend-hapi.onrender.com/saved/" + data.externalId);
 
-  //Initialising scroll-shadow if there are several reviews
+  
   useEffect(() => {
-    if(data.reviews?.length > 1) {
-      setReachedEnd(false);
+    
+    //Checking if reference is set to div
+    if(reviewContainer.current) {
+
+      //Calculating if content is bigger then container
+      const containerHeight = reviewContainer.current.offsetHeight;
+      const contentHeight = reviewContainer.current.scrollHeight;
+      const overflow = contentHeight - containerHeight;
+
+      if(overflow > 0) {
+        setReachedEnd(false);
+      }
+
     }
+
   }, [data]);
 
   //Listening to errors during save or delete from list
@@ -51,12 +64,15 @@ export const SinglePage = () => {
   //Calculating if reviews are scrolled to bottom
   const scrollToBottom = (e: HTMLElement) => {
 
-    if(e.scrollTop >= (e.scrollHeight - e.offsetHeight - 150)) {
-      setReachedEnd(true)
-    } else {
-      setReachedEnd(false)
-    }
+    const scrolled = e.scrollTop;
+    const overflow = e.scrollHeight - e.offsetHeight;
+    const nearEnd = overflow - 130;
 
+    if(scrolled >= nearEnd) {
+      setReachedEnd(true);
+    } else {
+      setReachedEnd(false);
+    }
   }
 
   //Saving or removing from list
@@ -148,7 +164,7 @@ export const SinglePage = () => {
       </div>
 
       {/* Reviews */}
-      <div className="gameReviews" onScroll={(e) => scrollToBottom(e.currentTarget)}>
+      <div className="gameReviews" onScroll={(e) => scrollToBottom(e.currentTarget)} ref={reviewContainer}>
         <div className="gameReviewsTitle">
           <h2>Reviews</h2>
           <small>Total: {data.reviews ? <span>{data.reviews.length}</span> : <span>0</span> } </small>
