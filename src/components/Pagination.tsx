@@ -51,6 +51,17 @@ export const Pagination = ({data}: {data: GameOverview[]}) => {
     const paginationControls = () => {
 
         const totalPages = Math.ceil(data.length / contentPerPage);
+        console.log(totalPages)
+        
+        //Calculating closest pages
+        const startPage = Math.max(1, currentPage -4); //Returns 4 previous page numbers unless they're lower then 1
+        const endPage = Math.min(totalPages, currentPage +4); //Returns next 4 page numbers unless they're over the total
+
+        //Pushing 4 previous and 4 upcoming pages into array
+        const pageOptions = [];
+        for(let i= startPage; i <= endPage; i++) {
+            pageOptions.push(i)
+        }
 
         return (
             <div className="paginationContainer">
@@ -60,11 +71,9 @@ export const Pagination = ({data}: {data: GameOverview[]}) => {
                 {/* Pages */}
                 <ul>
                     {
-                        Array.from({length: totalPages},
-                            (_, index) => (
-                                <li key={index} onClick={() => specificPage(index +1)} className={index +1 === currentPage ? "activePage" : "page"}>{ index +1 }</li>
-                            )
-                        )
+                        pageOptions.map((pageNumber) => (
+                            <li key={pageNumber} onClick={() => specificPage(pageNumber)} className={pageNumber === currentPage ? "activePage" : "page"}>{pageNumber}</li>
+                        ))
                     }
                 </ul>
 
