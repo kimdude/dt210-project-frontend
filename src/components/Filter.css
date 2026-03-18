@@ -1,3 +1,4 @@
+/* Design for */
 .filterContainer {
     display: flex;
     align-items: center;
@@ -11,6 +12,7 @@
 .filterContainer > div {
     display: flex;
     align-items: center;
+    width: 80%;
 }
 
 select {
@@ -22,5 +24,11 @@ select {
 }
 
 .submitBtn {
-    margin: 0px !important;
+    margin: 10px !important;
+}
+
+/* Screens under 900px */ 
+@media screen and (max-width: 900px) {
+    .filterContainer { flex-direction: column; }
+    select { width: 100%; margin: 10px; }
 }
