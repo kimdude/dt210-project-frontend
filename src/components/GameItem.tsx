@@ -11,7 +11,7 @@ export const GameItem = ({game}: {game: GameOverview}) => {
   const navigate = useNavigate();
 
   return (
-    <article className="gameOverview" style={{ backgroundImage: `url(${game.thumbnail})` }} onClick={() => navigate("/details/"+ game.title + "/" + game.id, {state: { type: "Games", title: game.title }})}>
+    <article className="gameOverview" style={{ backgroundImage: `url(${game.thumbnail})` }} onClick={() => navigate("/details/"+ game.title + "/" + game.id, {state: { type: "Games", title: game.title }})} aria-label={game.title}>
       <div>
 
         {/* Category */}

@@ -79,5 +79,8 @@
 
 /* Screens under 640px */
 @media screen and (max-width: 640px) {
-
+    .gameOverview { position: relative; width: 300px; min-height:350px; background-position: top; background-size: contain; height: fit-content; transition: none; }
+    .gameOverview:hover { transform: none; box-shadow: none; }
+    .gameOverview > div { position: absolute; bottom: 0; margin-left: 0px; width: 100%; height: fit-content; transition: none; background-color: #1E2C5E; padding: 10px 2vw; }
+    .gameOverview:hover > div { width: 100%;height: fit-content; padding: 10px 2vw; }
 }
